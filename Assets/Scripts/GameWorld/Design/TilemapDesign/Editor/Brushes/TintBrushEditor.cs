@@ -8,6 +8,12 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Editor.Bru
     {
         public override void OnInspectorGUI()
         {
+            EditorGUILayout.Space(1);
+            PlainOnInspectorGUI();
+        }
+
+        protected virtual void PlainOnInspectorGUI()
+        {
             var tintBrush = (TintBrush)target;
 
             tintBrush.Tint = EditorGUILayout.ColorField("Tint", tintBrush.Tint);

@@ -9,9 +9,9 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Editor.Bru
     {
         public Color Tint = Color.white;
 
-        public override void BoxFill(GridLayout grid, GameObject brushTarget, BoundsInt selectedCellsBounds)
+        public override void BoxFill(GridLayout gridLayout, GameObject brushTarget, BoundsInt selectedCellsBounds)
         {
-            base.BoxFill(grid, brushTarget, selectedCellsBounds);
+            base.BoxFill(gridLayout, brushTarget, selectedCellsBounds);
 
             var targetTilemap = brushTarget.GetComponent<Tilemap>();
 
