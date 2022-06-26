@@ -7,10 +7,12 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Editor.Bru
     [CustomGridBrush(false, false, false, "Tint Brush")]
     public class TintBrush : GridBrush
     {
-        public Color Tint;
+        public Color Tint = Color.white;
 
         public override void BoxFill(GridLayout grid, GameObject brushTarget, BoundsInt selectedCellsBounds)
         {
+            base.BoxFill(grid, brushTarget, selectedCellsBounds);
+
             var targetTilemap = brushTarget.GetComponent<Tilemap>();
 
             foreach (var cellPos in selectedCellsBounds.allPositionsWithin)
@@ -19,7 +21,6 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Editor.Bru
                 var cell = cells[GetCellIndexWrapAround(cellLocalPos.x, cellLocalPos.y, cellLocalPos.z)];
                 if (cell.tile != null)
                 {
-                    targetTilemap.SetTile(cellPos, cell.tile);
                     targetTilemap.SetColor(cellPos, Tint);
                 }
             }
