@@ -233,7 +233,7 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
 
         private void SaveData()
         {
-            LayerData.StartingSegment = StartingSegment;
+            LayerData.StartingSegment = new PathSegment(StartingSegment.Rect);
             LayerData.PathSegments.Clear();
             LayerData.PathSegments.AddRange(PathSegmentsByPos.Values);
         }
