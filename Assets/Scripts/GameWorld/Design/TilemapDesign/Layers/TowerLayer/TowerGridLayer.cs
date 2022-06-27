@@ -25,6 +25,7 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Tow
                 UpdateTowerSlotPositions();
             }
 
+            PathGridLayer.OnUpdatePathInfo -= UpdateTowerSlotPositions;
             PathGridLayer.OnUpdatePathInfo += UpdateTowerSlotPositions;
         }
 

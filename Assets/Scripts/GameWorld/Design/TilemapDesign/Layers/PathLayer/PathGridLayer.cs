@@ -38,7 +38,9 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
             LoadData();
             UpdatePathInfo();
 
+            Undo.undoRedoPerformed -= OnUndoRedoPerformed;
             Undo.undoRedoPerformed += OnUndoRedoPerformed;
+
             _isReady = true;
         }
 
