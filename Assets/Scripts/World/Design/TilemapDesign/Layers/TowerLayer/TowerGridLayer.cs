@@ -12,7 +12,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.TowerLa
     {
         [SerializeField] private Transform _MyTransform;
         [SerializeField] private PathGridLayer _PathGridLayer;
-        [SerializeField] private WorldDesignRoot _DesignRoot;
+        [SerializeField] private WorldLevelDesignRoot _LevelDesignRoot;
 
         private HashSet<Vector2Int> _towerSlotPositions = new();
 
@@ -21,7 +21,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.TowerLa
 
         private void OnEnable()
         {
-            if(_PathGridLayer.IsReady)
+            if(_PathGridLayer.IsReady && _LevelDesignRoot.IsReady)
             {
                 UpdateTowerSlotPositions();
             }
@@ -47,7 +47,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.TowerLa
                 {
                     foreach (var neighbourPos in neighbourIterator)
                     {
-                        if (_DesignRoot.IsPositionInPlayArea(neighbourPos)
+                        if (_LevelDesignRoot.IsPositionInPlayArea(neighbourPos)
                             && !_PathGridLayer.ReachableSegmentsByPos.ContainsKey(neighbourPos))
                         {
                             _towerSlotPositions.Add(neighbourPos);

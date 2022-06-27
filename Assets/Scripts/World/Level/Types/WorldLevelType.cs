@@ -2,6 +2,7 @@
 {
     public enum WorldLevelType
     {
-        Normal = 1
+        Normal = 1,
+        Endless = 2
     }
 }

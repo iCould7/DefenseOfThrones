@@ -1,10 +1,12 @@
 ﻿#if UNITY_EDITOR
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ICouldGames.DefenseOfThrones.World.Paths.NeighbourUtils;
 using NaughtyAttributes;
+using Unity.EditorCoroutines.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -17,6 +19,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
         [SerializeField] private Transform _MyTransform;
         [SerializeField] private PathGridLayerData _LayerData;
         [SerializeField] private Tilemap _PathTileMap;
+        [SerializeField] private WorldLevelDesignRoot _LevelDesignRoot;
 
         [NonSerialized] public Dictionary<Vector2Int, PathSegment> PathSegmentsByPos = new();
         [NonSerialized] public PathSegment StartingSegment;
@@ -37,6 +40,16 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
 
         private void OnEnable()
         {
+            EditorCoroutineUtility.StartCoroutineOwnerless(OnEnableCoroutine());
+        }
+
+        private IEnumerator OnEnableCoroutine()
+        {
+            while (!_LevelDesignRoot.IsReady)
+            {
+                yield return null;
+            }
+
             LoadData();
             UpdatePathInfo();
 
