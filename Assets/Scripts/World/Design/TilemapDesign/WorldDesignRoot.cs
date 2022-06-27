@@ -1,17 +1,20 @@
 ﻿using System.Collections.Generic;
-using ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.PathLayer;
-using ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.TowerLayer;
-using ICouldGames.DefenseOfThrones.GameWorld.Paths.NeighbourUtils;
+using ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLayer;
+using ICouldGames.DefenseOfThrones.World.Level.Types;
+using ICouldGames.DefenseOfThrones.World.Paths.NeighbourUtils;
 using UnityEngine;
 
 #if UNITY_EDITOR
 
-namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign
+namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
 {
-    public class GameWorldDesignRoot : MonoBehaviour
+    public class WorldDesignRoot : MonoBehaviour
     {
         [SerializeField] private PathGridLayer PathGridLayer;
-        [SerializeField] private TowerGridLayer TowerGridLayer;
+        [SerializeField] private WorldLevelType LevelType = WorldLevelType.Normal;
+        [SerializeField] private int LevelSubtype = 1;
+
+
 
         public bool IsPositionInPlayArea(Vector2Int position)
         {

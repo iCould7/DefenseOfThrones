@@ -3,7 +3,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.PathLayer
+namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLayer
 {
     public class PathGridLayerGizmo : MonoBehaviour
     {

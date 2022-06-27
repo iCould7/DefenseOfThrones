@@ -3,7 +3,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.TowerLayer
+namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.TowerLayer
 {
     public class TowerGridLayerGizmo : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace ICouldGames.DefenseOfThrones.GameWorld.Paths.NeighbourUtils
+namespace ICouldGames.DefenseOfThrones.World.Paths.NeighbourUtils
 {
     public static class PathNeighboursConstants
     {

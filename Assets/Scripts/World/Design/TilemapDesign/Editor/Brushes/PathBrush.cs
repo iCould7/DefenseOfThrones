@@ -1,8 +1,8 @@
-﻿using ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.PathLayer;
+﻿using ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLayer;
 using UnityEditor;
 using UnityEngine;
 
-namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Editor.Brushes
+namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Editor.Brushes
 {
     [CustomGridBrush(false, false, false, "Path Brush")]
     public class PathBrush : TintBrush

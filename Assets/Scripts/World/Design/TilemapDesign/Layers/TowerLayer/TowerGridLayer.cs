@@ -1,18 +1,18 @@
 ﻿#if UNITY_EDITOR
 
 using System.Collections.Generic;
-using ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.PathLayer;
-using ICouldGames.DefenseOfThrones.GameWorld.Paths.NeighbourUtils;
+using ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLayer;
+using ICouldGames.DefenseOfThrones.World.Paths.NeighbourUtils;
 using UnityEngine;
 
-namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.TowerLayer
+namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.TowerLayer
 {
     [ExecuteAlways]
     public class TowerGridLayer : MonoBehaviour
     {
         public Transform MyTransform;
         [SerializeField] private PathGridLayer PathGridLayer;
-        [SerializeField] private GameWorldDesignRoot DesignRoot;
+        [SerializeField] private WorldDesignRoot DesignRoot;
 
         private HashSet<Vector2Int> _towerSlotPositions = new();
 

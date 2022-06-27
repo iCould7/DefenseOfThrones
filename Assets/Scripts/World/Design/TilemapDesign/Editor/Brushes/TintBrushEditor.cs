@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEditor.Tilemaps;
 
-namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Editor.Brushes
+namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Editor.Brushes
 {
     [CustomEditor(typeof(TintBrush))]
     public class TintBrushEditor : GridBrushEditor

@@ -2,7 +2,7 @@ using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Editor.Brushes
+namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Editor.Brushes
 {
     [CustomGridBrush(false, false, false, "Tint Brush")]
     public class TintBrush : GridBrush

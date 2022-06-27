@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.PathLayer
+namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLayer
 {
     [Serializable]
     public class PathGridLayerData

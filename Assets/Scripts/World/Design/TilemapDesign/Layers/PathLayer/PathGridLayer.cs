@@ -3,13 +3,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ICouldGames.DefenseOfThrones.GameWorld.Paths.NeighbourUtils;
+using ICouldGames.DefenseOfThrones.World.Paths.NeighbourUtils;
 using NaughtyAttributes;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.PathLayer
+namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLayer
 {
     [ExecuteAlways]
     public class PathGridLayer : MonoBehaviour
