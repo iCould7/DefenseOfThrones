@@ -126,7 +126,6 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
             _reachableSegmentsByPos[StartingSegment.Rect.position] = StartingSegment;
             _faultySegments.Remove(StartingSegment);
 
-            var lastReachableSegment = StartingSegment;
             var currentSegment = StartingSegment;
             while (true)
             {
@@ -135,27 +134,38 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
                     break;
                 }
 
-                var lastSegmentExclusiveNeighbourCount = 0;
+                var reachableFlaggedNeighbourCount = 0;
+                var faultyNeighbourCount = 0;
+                PathSegment nextSegment = null;
+                var nextSegmentFound = false;
                 foreach (var neighbourPos in PathNeighbours.GetFourMainNeighbours(currentSegment.Rect.position))
                 {
-                    if (PathSegmentsByPos.ContainsKey(neighbourPos)
-                        && PathSegmentsByPos[neighbourPos] != lastReachableSegment)
+                    if (PathSegmentsByPos.ContainsKey(neighbourPos))
                     {
-                        lastSegmentExclusiveNeighbourCount++;
-                        currentSegment = PathSegmentsByPos[neighbourPos];
+                        if (_orderedReachableSegments.Contains(PathSegmentsByPos[neighbourPos]))
+                        {
+                            reachableFlaggedNeighbourCount++;
+                        }
+                        else
+                        {
+                            faultyNeighbourCount++;
+                            nextSegment = PathSegmentsByPos[neighbourPos];
+                            nextSegmentFound = true;
+                        }
                     }
                 }
 
-                if (lastSegmentExclusiveNeighbourCount < 2)
+                if (reachableFlaggedNeighbourCount > 1 || faultyNeighbourCount > 1)
                 {
-                    _orderedReachableSegments.Add(currentSegment);
-                    _reachableSegmentsByPos[currentSegment.Rect.position] = currentSegment;
-                    _faultySegments.Remove(currentSegment);
+                    break;
                 }
 
-                if (lastSegmentExclusiveNeighbourCount == 1)
+                if (nextSegmentFound)
                 {
-                    lastReachableSegment = currentSegment;
+                    _orderedReachableSegments.Add(nextSegment);
+                    _reachableSegmentsByPos[nextSegment.Rect.position] = nextSegment;
+                    _faultySegments.Remove(nextSegment);
+                    currentSegment = nextSegment;
                 }
                 else
                 {
