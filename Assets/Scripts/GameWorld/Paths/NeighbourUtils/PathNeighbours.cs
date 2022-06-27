@@ -14,12 +14,10 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Paths.NeighbourUtils
             Vector2Int.up,
         };
 
-        private static readonly FourMainNeighboursIterator FourMainNeighboursIterator = new ();
-
+        // TODO: See if object pooling can be done
         public static FourMainNeighboursIterator GetFourMainNeighbours(Vector2Int mainPosition)
         {
-            FourMainNeighboursIterator.SetMainPosition(mainPosition);
-            return FourMainNeighboursIterator;
+            return new FourMainNeighboursIterator(mainPosition);
         }
     }
 

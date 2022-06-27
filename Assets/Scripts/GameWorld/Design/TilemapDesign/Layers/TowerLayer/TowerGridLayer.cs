@@ -7,12 +7,16 @@ using UnityEngine;
 
 namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.TowerLayer
 {
+    [ExecuteAlways]
     public class TowerGridLayer : MonoBehaviour
     {
+        public Transform MyTransform;
         [SerializeField] private PathGridLayer PathGridLayer;
         [SerializeField] private GameWorldDesignRoot DesignRoot;
 
         private HashSet<Vector2Int> _towerSlotPositions = new();
+
+        public HashSet<Vector2Int> TowerSlotPositions => _towerSlotPositions;
 
         private void OnEnable()
         {
