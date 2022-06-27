@@ -13,6 +13,7 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
     [ExecuteAlways]
     public class PathGridLayer : MonoBehaviour
     {
+        public Transform MyTransform;
         [SerializeField] private PathGridLayerData LayerData;
         [SerializeField] private Tilemap PathTileMap;
 
