@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ICouldGames.DefenseOfThrones.GameWorld.Paths.NeighbourUtils;
+using NaughtyAttributes;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -240,7 +241,7 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
             LayerData.PathSegments.AddRange(PathSegmentsByPos.Values);
         }
 
-        [ContextMenu("Clear Layer")]
+        [Button("Clear Layer")]
         public void Clear()
         {
             Undo.RegisterFullObjectHierarchyUndo(gameObject, "PathGridLayer-Clear");
@@ -257,7 +258,7 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
             OnUpdatePathInfo?.Invoke();
         }
 
-        [ContextMenu("Reverse Path")]
+        [Button("Reverse Path")]
         public void ReversePath()
         {
             Undo.RegisterFullObjectHierarchyUndo(gameObject, "PathGridLayer-Reverse Path");
