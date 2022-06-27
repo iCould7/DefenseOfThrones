@@ -18,6 +18,7 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
             DrawReachableSegmentGizmos();
             DrawFaultySegmentGizmos();
             DrawWayPointGizmos();
+            DrawStartingPointGizmo();
         }
 
         private void DrawReachableSegmentGizmos()
@@ -41,6 +42,19 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
             foreach (var waypoint in PathGridLayer.Waypoints)
             {
                 Gizmos.DrawSphere(waypoint, 0.1f);
+            }
+        }
+
+        private void DrawStartingPointGizmo()
+        {
+            if (PathGridLayer.Waypoints.Count > 0)
+            {
+                var oldGizmoColor = Gizmos.color;
+                Gizmos.color = Color.green;
+
+                Gizmos.DrawSphere(PathGridLayer.Waypoints[0], 0.2f);
+
+                Gizmos.color = oldGizmoColor;
             }
         }
 
