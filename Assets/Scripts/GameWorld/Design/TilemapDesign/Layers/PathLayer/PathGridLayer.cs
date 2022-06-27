@@ -18,16 +18,25 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
 
         [NonSerialized] public Dictionary<Vector2Int, PathSegment> PathSegmentsByPos = new();
         [NonSerialized] public PathSegment StartingSegment;
+        public UpdatePathInfoCallback OnUpdatePathInfo;
 
-        private List<PathSegment> _reachableSegments = new();
+        private List<PathSegment> _orderedReachableSegments = new();
+        private Dictionary<Vector2Int, PathSegment> _reachableSegmentsByPos = new();
         private List<PathSegment> _faultySegments = new();
+        private List<Vector3> _waypoints = new();
+        private bool _isReady = false;
+
+        public List<PathSegment> OrderedReachableSegments => _orderedReachableSegments;
+        public Dictionary<Vector2Int, PathSegment> ReachableSegmentsByPos => _reachableSegmentsByPos;
+        public bool IsReady => _isReady;
 
         private void OnEnable()
         {
             LoadData();
-            UpdatePathSegmentsReachability();
+            UpdatePathInfo();
 
             Undo.undoRedoPerformed += OnUndoRedoPerformed;
+            _isReady = true;
         }
 
         public void AddPathSegment(PathSegment segment)
@@ -36,7 +45,7 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
             DecideForStartingSegment();
 
             SaveData();
-            UpdatePathSegmentsReachability();
+            UpdatePathInfo();
         }
 
         public void DeletePathSegment(PathSegment segment)
@@ -54,7 +63,7 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
             }
 
             SaveData();
-            UpdatePathSegmentsReachability();
+            UpdatePathInfo();
         }
 
         private void DecideForStartingSegment()
@@ -92,20 +101,29 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
             }
         }
 
+        private void UpdatePathInfo()
+        {
+            UpdatePathSegmentsReachability();
+            UpdateWaypoints();
+            OnUpdatePathInfo?.Invoke();
+        }
+
         private void UpdatePathSegmentsReachability()
         {
+            _orderedReachableSegments.Clear();
+            _reachableSegmentsByPos.Clear();
+            _faultySegments.Clear();
+
             if (PathSegmentsByPos.Count == 0)
             {
                 return;
             }
 
-            _reachableSegments.Clear();
-            _faultySegments.Clear();
-
             var allSegments = PathSegmentsByPos.Values.ToList();
             _faultySegments.AddRange(allSegments);
 
-            _reachableSegments.Add(StartingSegment);
+            _orderedReachableSegments.Add(StartingSegment);
+            _reachableSegmentsByPos[StartingSegment.Rect.position] = StartingSegment;
             _faultySegments.Remove(StartingSegment);
 
             var lastReachableSegment = StartingSegment;
@@ -130,7 +148,8 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
 
                 if (lastSegmentExclusiveNeighbourCount < 2)
                 {
-                    _reachableSegments.Add(currentSegment);
+                    _orderedReachableSegments.Add(currentSegment);
+                    _reachableSegmentsByPos[currentSegment.Rect.position] = currentSegment;
                     _faultySegments.Remove(currentSegment);
                 }
 
@@ -142,6 +161,41 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
                 {
                     break;
                 }
+            }
+        }
+
+        private void UpdateWaypoints()
+        {
+            _waypoints.Clear();
+
+            if (PathSegmentsByPos.Count == 0)
+            {
+                return;
+            }
+
+            // Add first segment
+            var lastDirection = Vector2Int.zero;
+            _waypoints.Add(StartingSegment.Rect.center);
+            var lastWaypointV2Int = StartingSegment.Rect.position;
+
+            // Add segments in between first & last
+            for(var i = 1; i < _orderedReachableSegments.Count - 1; i++)
+            {
+                var currentSegment = _orderedReachableSegments[i];
+                var currentDirection = currentSegment.Rect.position - lastWaypointV2Int;
+                if (currentDirection != lastDirection)
+                {
+                    _waypoints.Add(currentSegment.Rect.center);
+                    lastWaypointV2Int = currentSegment.Rect.position;
+                    lastDirection = currentDirection;
+                }
+            }
+
+            // Add last segment
+            if (PathSegmentsByPos.Count > 1)
+            {
+                var lastSegment = _orderedReachableSegments[^1];
+                _waypoints.Add(lastSegment.Rect.center);
             }
         }
 
@@ -163,33 +217,35 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
             LayerData.PathSegments.AddRange(PathSegmentsByPos.Values);
         }
 
-        public List<Vector3> GenerateWaypoints()
-        {
-            throw new NotImplementedException();
-        }
-
         [ContextMenu("Clear Layer")]
         public void Clear()
         {
             Undo.RegisterFullObjectHierarchyUndo(gameObject, "PathGridLayer-Clear");
+
             PathTileMap.ClearAllTiles();
             PathSegmentsByPos.Clear();
             StartingSegment.Rect = default;
-            _reachableSegments.Clear();
+            _orderedReachableSegments.Clear();
+            _reachableSegmentsByPos.Clear();
             _faultySegments.Clear();
+            _waypoints.Clear();
+
             SaveData();
+            OnUpdatePathInfo?.Invoke();
         }
 
         private void OnUndoRedoPerformed()
         {
             LoadData();
-            UpdatePathSegmentsReachability();
+            UpdatePathInfo();
         }
 
         private void OnDestroy()
         {
             Undo.undoRedoPerformed -= OnUndoRedoPerformed;
         }
+
+        public delegate void UpdatePathInfoCallback();
     }
 }
 
