@@ -19,9 +19,12 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign
             foreach (var segment in PathGridLayer.OrderedReachableSegments)
             {
                 playAreaPositions.Add(segment.Rect.position);
-                foreach (var neighbour in PathNeighbours.GetFourMainNeighbours(segment.Rect.position))
+                using (var neighbourIterator = FourMainNeighboursIterator.GetIterator(segment.Rect.position))
                 {
-                    playAreaPositions.Add(neighbour);
+                    foreach (var neighbour in neighbourIterator)
+                    {
+                        playAreaPositions.Add(neighbour);
+                    }
                 }
             }
 

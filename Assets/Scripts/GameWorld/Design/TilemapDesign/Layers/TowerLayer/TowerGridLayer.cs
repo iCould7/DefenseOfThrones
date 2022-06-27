@@ -41,12 +41,15 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Tow
             _towerSlotPositions.Clear();
             foreach (var segment in PathGridLayer.OrderedReachableSegments)
             {
-                foreach (var neighbourPos in PathNeighbours.GetFourMainNeighbours(segment.Rect.position))
+                using (var neighbourIterator = FourMainNeighboursIterator.GetIterator(segment.Rect.position))
                 {
-                    if (DesignRoot.IsPositionInPlayArea(neighbourPos)
-                        && !PathGridLayer.ReachableSegmentsByPos.ContainsKey(neighbourPos))
+                    foreach (var neighbourPos in neighbourIterator)
                     {
-                        _towerSlotPositions.Add(neighbourPos);
+                        if (DesignRoot.IsPositionInPlayArea(neighbourPos)
+                            && !PathGridLayer.ReachableSegmentsByPos.ContainsKey(neighbourPos))
+                        {
+                            _towerSlotPositions.Add(neighbourPos);
+                        }
                     }
                 }
             }

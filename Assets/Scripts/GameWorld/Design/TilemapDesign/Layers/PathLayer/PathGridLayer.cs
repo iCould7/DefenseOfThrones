@@ -81,11 +81,14 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
             foreach (var segment in allSegments)
             {
                 var neighbourCount = 0;
-                foreach (var neighbourPos in PathNeighbours.GetFourMainNeighbours(segment.Rect.position))
+                using (var neighbourIterator = FourMainNeighboursIterator.GetIterator(segment.Rect.position))
                 {
-                    if (PathSegmentsByPos.ContainsKey(neighbourPos))
+                    foreach (var neighbourPos in neighbourIterator)
                     {
-                        neighbourCount++;
+                        if (PathSegmentsByPos.ContainsKey(neighbourPos))
+                        {
+                            neighbourCount++;
+                        }
                     }
                 }
 
@@ -140,19 +143,22 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
                 var faultyNeighbourCount = 0;
                 PathSegment nextSegment = null;
                 var nextSegmentFound = false;
-                foreach (var neighbourPos in PathNeighbours.GetFourMainNeighbours(currentSegment.Rect.position))
+                using (var neighbourIterator = FourMainNeighboursIterator.GetIterator(currentSegment.Rect.position))
                 {
-                    if (PathSegmentsByPos.ContainsKey(neighbourPos))
+                    foreach (var neighbourPos in neighbourIterator)
                     {
-                        if (_orderedReachableSegments.Contains(PathSegmentsByPos[neighbourPos]))
+                        if (PathSegmentsByPos.ContainsKey(neighbourPos))
                         {
-                            reachableFlaggedNeighbourCount++;
-                        }
-                        else
-                        {
-                            faultyNeighbourCount++;
-                            nextSegment = PathSegmentsByPos[neighbourPos];
-                            nextSegmentFound = true;
+                            if (_orderedReachableSegments.Contains(PathSegmentsByPos[neighbourPos]))
+                            {
+                                reachableFlaggedNeighbourCount++;
+                            }
+                            else
+                            {
+                                faultyNeighbourCount++;
+                                nextSegment = PathSegmentsByPos[neighbourPos];
+                                nextSegmentFound = true;
+                            }
                         }
                     }
                 }
