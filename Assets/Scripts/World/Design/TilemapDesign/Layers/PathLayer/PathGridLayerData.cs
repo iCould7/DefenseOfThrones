@@ -7,36 +7,36 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
     [Serializable]
     public class PathGridLayerData
     {
-        public PathSegment StartingSegment;
-        public List<PathSegment> PathSegments;
+        public PathSegment _StartingSegment;
+        public List<PathSegment> _PathSegments;
 
         public void Reset()
         {
-            StartingSegment = null;
-            PathSegments.Clear();
+            _StartingSegment = null;
+            _PathSegments.Clear();
         }
     }
 
     [Serializable]
     public class PathSegment : IEquatable<PathSegment>
     {
-        public RectInt Rect;
+        public RectInt _Rect;
 
         public PathSegment(RectInt rect)
         {
-            Rect = rect;
+            _Rect = rect;
         }
 
         public void Reset()
         {
-            Rect = default;
+            _Rect = default;
         }
 
         public bool Equals(PathSegment other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Rect.Equals(other.Rect);
+            return _Rect.Equals(other._Rect);
         }
     }
 }

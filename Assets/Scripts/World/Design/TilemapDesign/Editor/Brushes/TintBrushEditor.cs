@@ -16,7 +16,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Editor.Brushes
         {
             var tintBrush = (TintBrush)target;
 
-            tintBrush.Tint = EditorGUILayout.ColorField("Tint", tintBrush.Tint);
+            tintBrush._Tint = EditorGUILayout.ColorField("Tint", tintBrush._Tint);
 
             EditorGUILayout.Space(30);
             EditorGUILayout.LabelField("---------------------BUILT-IN-FIELDS------------------------");

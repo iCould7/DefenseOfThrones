@@ -10,19 +10,17 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
 {
     public class WorldDesignRoot : MonoBehaviour
     {
-        [SerializeField] private PathGridLayer PathGridLayer;
-        [SerializeField] private WorldLevelType LevelType = WorldLevelType.Normal;
-        [SerializeField] private int LevelSubtype = 1;
-
-
+        [SerializeField] private PathGridLayer _PathGridLayer;
+        [SerializeField] private WorldLevelType _LevelType = WorldLevelType.Normal;
+        [SerializeField] private int _LevelSubtype = 1;
 
         public bool IsPositionInPlayArea(Vector2Int position)
         {
             var playAreaPositions = new HashSet<Vector2Int>();
-            foreach (var segment in PathGridLayer.OrderedReachableSegments)
+            foreach (var segment in _PathGridLayer.OrderedReachableSegments)
             {
-                playAreaPositions.Add(segment.Rect.position);
-                using (var neighbourIterator = FourMainNeighboursIterator.GetIterator(segment.Rect.position))
+                playAreaPositions.Add(segment._Rect.position);
+                using (var neighbourIterator = FourMainNeighboursIterator.GetIterator(segment._Rect.position))
                 {
                     foreach (var neighbour in neighbourIterator)
                     {

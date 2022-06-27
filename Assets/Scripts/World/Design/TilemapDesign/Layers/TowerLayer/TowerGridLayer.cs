@@ -10,44 +10,45 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.TowerLa
     [ExecuteAlways]
     public class TowerGridLayer : MonoBehaviour
     {
-        public Transform MyTransform;
-        [SerializeField] private PathGridLayer PathGridLayer;
-        [SerializeField] private WorldDesignRoot DesignRoot;
+        [SerializeField] private Transform _MyTransform;
+        [SerializeField] private PathGridLayer _PathGridLayer;
+        [SerializeField] private WorldDesignRoot _DesignRoot;
 
         private HashSet<Vector2Int> _towerSlotPositions = new();
 
+        public Transform MyTransform => _MyTransform;
         public HashSet<Vector2Int> TowerSlotPositions => _towerSlotPositions;
 
         private void OnEnable()
         {
-            if(PathGridLayer.IsReady)
+            if(_PathGridLayer.IsReady)
             {
                 UpdateTowerSlotPositions();
             }
 
-            PathGridLayer.OnUpdatePathInfo -= UpdateTowerSlotPositions;
-            PathGridLayer.OnUpdatePathInfo += UpdateTowerSlotPositions;
+            _PathGridLayer.OnUpdatePathInfo -= UpdateTowerSlotPositions;
+            _PathGridLayer.OnUpdatePathInfo += UpdateTowerSlotPositions;
         }
 
         private void OnDestroy()
         {
-            if (PathGridLayer != null)
+            if (_PathGridLayer != null)
             {
-                PathGridLayer.OnUpdatePathInfo -= UpdateTowerSlotPositions;
+                _PathGridLayer.OnUpdatePathInfo -= UpdateTowerSlotPositions;
             }
         }
 
         private void UpdateTowerSlotPositions()
         {
             _towerSlotPositions.Clear();
-            foreach (var segment in PathGridLayer.OrderedReachableSegments)
+            foreach (var segment in _PathGridLayer.OrderedReachableSegments)
             {
-                using (var neighbourIterator = FourMainNeighboursIterator.GetIterator(segment.Rect.position))
+                using (var neighbourIterator = FourMainNeighboursIterator.GetIterator(segment._Rect.position))
                 {
                     foreach (var neighbourPos in neighbourIterator)
                     {
-                        if (DesignRoot.IsPositionInPlayArea(neighbourPos)
-                            && !PathGridLayer.ReachableSegmentsByPos.ContainsKey(neighbourPos))
+                        if (_DesignRoot.IsPositionInPlayArea(neighbourPos)
+                            && !_PathGridLayer.ReachableSegmentsByPos.ContainsKey(neighbourPos))
                         {
                             _towerSlotPositions.Add(neighbourPos);
                         }

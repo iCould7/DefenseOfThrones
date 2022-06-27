@@ -7,11 +7,11 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
 {
     public class PathGridLayerGizmo : MonoBehaviour
     {
-        [SerializeField] private PathGridLayer PathGridLayer;
-        [SerializeField] private Color ReachableSegmentFaceColor;
-        [SerializeField] private Color ReachableSegmentLineColor;
-        [SerializeField] private Color FaultySegmentFaceColor;
-        [SerializeField] private Color FaultySegmentLineColor;
+        [SerializeField] private PathGridLayer _PathGridLayer;
+        [SerializeField] private Color _ReachableSegmentFaceColor;
+        [SerializeField] private Color _ReachableSegmentLineColor;
+        [SerializeField] private Color _FaultySegmentFaceColor;
+        [SerializeField] private Color _FaultySegmentLineColor;
 
         private void OnDrawGizmos()
         {
@@ -23,23 +23,23 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
 
         private void DrawReachableSegmentGizmos()
         {
-            foreach (var reachableSegment in PathGridLayer.OrderedReachableSegments)
+            foreach (var reachableSegment in _PathGridLayer.OrderedReachableSegments)
             {
-                Handles.DrawSolidRectangleWithOutline(GetWorldRect(reachableSegment.Rect), ReachableSegmentFaceColor, ReachableSegmentLineColor);
+                Handles.DrawSolidRectangleWithOutline(GetWorldRect(reachableSegment._Rect), _ReachableSegmentFaceColor, _ReachableSegmentLineColor);
             }
         }
 
         private void DrawFaultySegmentGizmos()
         {
-            foreach (var faultySegment in PathGridLayer.FaultySegments)
+            foreach (var faultySegment in _PathGridLayer.FaultySegments)
             {
-                Handles.DrawSolidRectangleWithOutline(GetWorldRect(faultySegment.Rect), FaultySegmentFaceColor, FaultySegmentLineColor);
+                Handles.DrawSolidRectangleWithOutline(GetWorldRect(faultySegment._Rect), _FaultySegmentFaceColor, _FaultySegmentLineColor);
             }
         }
 
         private void DrawWayPointGizmos()
         {
-            foreach (var waypoint in PathGridLayer.Waypoints)
+            foreach (var waypoint in _PathGridLayer.Waypoints)
             {
                 Gizmos.DrawSphere(waypoint, 0.1f);
             }
@@ -47,12 +47,12 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
 
         private void DrawStartingPointGizmo()
         {
-            if (PathGridLayer.Waypoints.Count > 0)
+            if (_PathGridLayer.Waypoints.Count > 0)
             {
                 var oldGizmoColor = Gizmos.color;
                 Gizmos.color = Color.green;
 
-                Gizmos.DrawSphere(PathGridLayer.Waypoints[0], 0.2f);
+                Gizmos.DrawSphere(_PathGridLayer.Waypoints[0], 0.2f);
 
                 Gizmos.color = oldGizmoColor;
             }
@@ -60,7 +60,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
 
         private Rect GetWorldRect(RectInt rectInt)
         {
-            var offsetVector = PathGridLayer.MyTransform.position;
+            var offsetVector = _PathGridLayer.MyTransform.position;
             var rectX = offsetVector.x + rectInt.x;
             var rectY = offsetVector.y + rectInt.y;
             return new Rect(rectX, rectY, rectInt.width, rectInt.height);

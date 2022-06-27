@@ -14,9 +14,9 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
     [ExecuteAlways]
     public class PathGridLayer : MonoBehaviour
     {
-        public Transform MyTransform;
-        [SerializeField] private PathGridLayerData LayerData;
-        [SerializeField] private Tilemap PathTileMap;
+        [SerializeField] private Transform _MyTransform;
+        [SerializeField] private PathGridLayerData _LayerData;
+        [SerializeField] private Tilemap _PathTileMap;
 
         [NonSerialized] public Dictionary<Vector2Int, PathSegment> PathSegmentsByPos = new();
         [NonSerialized] public PathSegment StartingSegment;
@@ -28,6 +28,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
         private List<Vector3> _waypoints = new();
         private bool _isReady = false;
 
+        public Transform MyTransform => _MyTransform;
         public List<PathSegment> FaultySegments => _faultySegments;
         public List<PathSegment> OrderedReachableSegments => _orderedReachableSegments;
         public Dictionary<Vector2Int, PathSegment> ReachableSegmentsByPos => _reachableSegmentsByPos;
@@ -47,7 +48,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
 
         public void AddPathSegment(PathSegment segment)
         {
-            PathSegmentsByPos[segment.Rect.position] = segment;
+            PathSegmentsByPos[segment._Rect.position] = segment;
             DecideForStartingSegment();
 
             SaveData();
@@ -56,12 +57,12 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
 
         public void DeletePathSegment(PathSegment segment)
         {
-            if (!PathSegmentsByPos.ContainsKey(segment.Rect.position))
+            if (!PathSegmentsByPos.ContainsKey(segment._Rect.position))
             {
                 return;
             }
 
-            PathSegmentsByPos.Remove(segment.Rect.position);
+            PathSegmentsByPos.Remove(segment._Rect.position);
 
             if (StartingSegment.Equals(segment))
             {
@@ -85,7 +86,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
             foreach (var segment in allSegments)
             {
                 var neighbourCount = 0;
-                using (var neighbourIterator = FourMainNeighboursIterator.GetIterator(segment.Rect.position))
+                using (var neighbourIterator = FourMainNeighboursIterator.GetIterator(segment._Rect.position))
                 {
                     foreach (var neighbourPos in neighbourIterator)
                     {
@@ -132,7 +133,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
             _faultySegments.AddRange(allSegments);
 
             _orderedReachableSegments.Add(StartingSegment);
-            _reachableSegmentsByPos[StartingSegment.Rect.position] = StartingSegment;
+            _reachableSegmentsByPos[StartingSegment._Rect.position] = StartingSegment;
             _faultySegments.Remove(StartingSegment);
 
             var currentSegment = StartingSegment;
@@ -147,7 +148,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
                 var faultyNeighbourCount = 0;
                 PathSegment nextSegment = null;
                 var nextSegmentFound = false;
-                using (var neighbourIterator = FourMainNeighboursIterator.GetIterator(currentSegment.Rect.position))
+                using (var neighbourIterator = FourMainNeighboursIterator.GetIterator(currentSegment._Rect.position))
                 {
                     foreach (var neighbourPos in neighbourIterator)
                     {
@@ -175,7 +176,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
                 if (nextSegmentFound)
                 {
                     _orderedReachableSegments.Add(nextSegment);
-                    _reachableSegmentsByPos[nextSegment.Rect.position] = nextSegment;
+                    _reachableSegmentsByPos[nextSegment._Rect.position] = nextSegment;
                     _faultySegments.Remove(nextSegment);
                     currentSegment = nextSegment;
                 }
@@ -196,21 +197,21 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
             }
 
             // Add first segment
-            _waypoints.Add(StartingSegment.Rect.center);
+            _waypoints.Add(StartingSegment._Rect.center);
             Vector2Int lastDirection = Vector2Int.zero;
             if (_orderedReachableSegments.Count > 1)
             {
-                lastDirection = _orderedReachableSegments[1].Rect.position - StartingSegment.Rect.position;
+                lastDirection = _orderedReachableSegments[1]._Rect.position - StartingSegment._Rect.position;
             }
 
             // Add segments in between first & last
             for(var i = 1; i < _orderedReachableSegments.Count - 1; i++)
             {
                 var currentSegment = _orderedReachableSegments[i];
-                var currentDirection = _orderedReachableSegments[i+1].Rect.position - currentSegment.Rect.position;
+                var currentDirection = _orderedReachableSegments[i+1]._Rect.position - currentSegment._Rect.position;
                 if (currentDirection != lastDirection)
                 {
-                    _waypoints.Add(currentSegment.Rect.center);
+                    _waypoints.Add(currentSegment._Rect.center);
                     lastDirection = currentDirection;
                 }
             }
@@ -219,26 +220,26 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
             if (PathSegmentsByPos.Count > 1)
             {
                 var lastSegment = _orderedReachableSegments[^1];
-                _waypoints.Add(lastSegment.Rect.center);
+                _waypoints.Add(lastSegment._Rect.center);
             }
         }
 
         private void LoadData()
         {
-            StartingSegment = LayerData.StartingSegment;
+            StartingSegment = _LayerData._StartingSegment;
 
             PathSegmentsByPos.Clear();
-            foreach (var segment in LayerData.PathSegments)
+            foreach (var segment in _LayerData._PathSegments)
             {
-                PathSegmentsByPos[segment.Rect.position] = segment;
+                PathSegmentsByPos[segment._Rect.position] = segment;
             }
         }
 
         private void SaveData()
         {
-            LayerData.StartingSegment = new PathSegment(StartingSegment.Rect);
-            LayerData.PathSegments.Clear();
-            LayerData.PathSegments.AddRange(PathSegmentsByPos.Values);
+            _LayerData._StartingSegment = new PathSegment(StartingSegment._Rect);
+            _LayerData._PathSegments.Clear();
+            _LayerData._PathSegments.AddRange(PathSegmentsByPos.Values);
         }
 
         [Button("Clear Layer")]
@@ -246,9 +247,9 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLay
         {
             Undo.RegisterFullObjectHierarchyUndo(gameObject, "PathGridLayer-Clear");
 
-            PathTileMap.ClearAllTiles();
+            _PathTileMap.ClearAllTiles();
             PathSegmentsByPos.Clear();
-            StartingSegment.Rect = default;
+            StartingSegment._Rect = default;
             _orderedReachableSegments.Clear();
             _reachableSegmentsByPos.Clear();
             _faultySegments.Clear();

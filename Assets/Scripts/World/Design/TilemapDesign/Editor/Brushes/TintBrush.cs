@@ -7,7 +7,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Editor.Brushes
     [CustomGridBrush(false, false, false, "Tint Brush")]
     public class TintBrush : GridBrush
     {
-        public Color Tint = Color.white;
+        public Color _Tint = Color.white;
 
         public override void BoxFill(GridLayout gridLayout, GameObject brushTarget, BoundsInt selectedCellsBounds)
         {
@@ -21,7 +21,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Editor.Brushes
                 var cell = cells[GetCellIndexWrapAround(cellLocalPos.x, cellLocalPos.y, cellLocalPos.z)];
                 if (cell.tile != null)
                 {
-                    targetTilemap.SetColor(cellPos, Tint);
+                    targetTilemap.SetColor(cellPos, _Tint);
                 }
             }
         }
