@@ -255,6 +255,21 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
             OnUpdatePathInfo?.Invoke();
         }
 
+        [ContextMenu("Reverse Path")]
+        public void ReversePath()
+        {
+            Undo.RegisterFullObjectHierarchyUndo(gameObject, "PathGridLayer-Reverse Path");
+
+            if (_orderedReachableSegments.Count == 0)
+            {
+                return;
+            }
+
+            StartingSegment = _orderedReachableSegments[^1];
+            SaveData();
+            UpdatePathInfo();
+        }
+
         private void OnUndoRedoPerformed()
         {
             LoadData();
