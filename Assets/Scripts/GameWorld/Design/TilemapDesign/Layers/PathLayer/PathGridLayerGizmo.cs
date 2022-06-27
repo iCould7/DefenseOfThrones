@@ -15,14 +15,32 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
 
         private void OnDrawGizmos()
         {
+            DrawReachableSegmentGizmos();
+            DrawFaultySegmentGizmos();
+            DrawWayPointGizmos();
+        }
+
+        private void DrawReachableSegmentGizmos()
+        {
             foreach (var reachableSegment in PathGridLayer.OrderedReachableSegments)
             {
                 Handles.DrawSolidRectangleWithOutline(GetWorldRect(reachableSegment.Rect), ReachableSegmentFaceColor, ReachableSegmentLineColor);
             }
+        }
 
+        private void DrawFaultySegmentGizmos()
+        {
             foreach (var faultySegment in PathGridLayer.FaultySegments)
             {
                 Handles.DrawSolidRectangleWithOutline(GetWorldRect(faultySegment.Rect), FaultySegmentFaceColor, FaultySegmentLineColor);
+            }
+        }
+
+        private void DrawWayPointGizmos()
+        {
+            foreach (var waypoint in PathGridLayer.Waypoints)
+            {
+                Gizmos.DrawSphere(waypoint, 0.1f);
             }
         }
 
