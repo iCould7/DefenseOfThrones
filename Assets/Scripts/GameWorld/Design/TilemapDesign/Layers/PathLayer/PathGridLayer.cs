@@ -30,6 +30,7 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
         public List<PathSegment> FaultySegments => _faultySegments;
         public List<PathSegment> OrderedReachableSegments => _orderedReachableSegments;
         public Dictionary<Vector2Int, PathSegment> ReachableSegmentsByPos => _reachableSegmentsByPos;
+        public List<Vector3> Waypoints => _waypoints;
         public bool IsReady => _isReady;
 
         private void OnEnable()
@@ -192,19 +193,21 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
             }
 
             // Add first segment
-            var lastDirection = Vector2Int.zero;
             _waypoints.Add(StartingSegment.Rect.center);
-            var lastWaypointV2Int = StartingSegment.Rect.position;
+            Vector2Int lastDirection = Vector2Int.zero;
+            if (_orderedReachableSegments.Count > 1)
+            {
+                lastDirection = _orderedReachableSegments[1].Rect.position - StartingSegment.Rect.position;
+            }
 
             // Add segments in between first & last
             for(var i = 1; i < _orderedReachableSegments.Count - 1; i++)
             {
                 var currentSegment = _orderedReachableSegments[i];
-                var currentDirection = currentSegment.Rect.position - lastWaypointV2Int;
+                var currentDirection = _orderedReachableSegments[i+1].Rect.position - currentSegment.Rect.position;
                 if (currentDirection != lastDirection)
                 {
                     _waypoints.Add(currentSegment.Rect.center);
-                    lastWaypointV2Int = currentSegment.Rect.position;
                     lastDirection = currentDirection;
                 }
             }
