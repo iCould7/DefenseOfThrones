@@ -27,6 +27,7 @@ namespace ICouldGames.DefenseOfThrones.GameWorld.Design.TilemapDesign.Layers.Pat
         private List<Vector3> _waypoints = new();
         private bool _isReady = false;
 
+        public List<PathSegment> FaultySegments => _faultySegments;
         public List<PathSegment> OrderedReachableSegments => _orderedReachableSegments;
         public Dictionary<Vector2Int, PathSegment> ReachableSegmentsByPos => _reachableSegmentsByPos;
         public bool IsReady => _isReady;
