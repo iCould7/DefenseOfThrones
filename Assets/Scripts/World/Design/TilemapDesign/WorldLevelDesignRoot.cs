@@ -47,7 +47,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
                 Directory.CreateDirectory(WorldLevelPathUtil.GetProcessedPrefabDirectoryPath(_LevelId.Type));
             }
 
-            var processedLevelSavePath = WorldLevelPathUtil.GetProcessedPrefabPath(_LevelId.Type, _LevelId.Subtype);
+            var processedLevelSavePath = WorldLevelPathUtil.GetProcessedPrefabPath(_LevelId);
             var processedLevelPrefab = GenerateProcessedLevelPrefab();
             PrefabUtility.SaveAsPrefabAsset(processedLevelPrefab, processedLevelSavePath);
             DestroyImmediate(processedLevelPrefab.gameObject);
@@ -60,7 +60,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
 
         private GameObject GenerateProcessedLevelPrefab()
         {
-            var processedLevelGO = new GameObject(WorldLevelPathUtil.GetProcessedPrefabName(_LevelId.Type, _LevelId.Subtype));
+            var processedLevelGO = new GameObject(WorldLevelPathUtil.GetProcessedPrefabName(_LevelId));
             var processedLevelTransform = processedLevelGO.transform;
             processedLevelTransform.position = Vector3.zero;
             Instantiate(_Grid, processedLevelTransform).name = "Grid";
@@ -114,7 +114,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
 
         private void SavePrefab()
         {
-            PrefabUtility.SaveAsPrefabAsset(gameObject, WorldLevelPathUtil.GetDesignedPrefabPath(_LevelId.Type, _LevelId.Subtype));
+            PrefabUtility.SaveAsPrefabAsset(gameObject, WorldLevelPathUtil.GetDesignedPrefabPath(_LevelId));
             var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
             EditorCoroutineUtility.StartCoroutineOwnerless(ClearPrefabDirtiness(prefabStage));
         }

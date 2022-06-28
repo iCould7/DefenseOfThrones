@@ -8,9 +8,9 @@ namespace ICouldGames.DefenseOfThrones.World.Level.DirectoryPath
 {
     public static class WorldLevelPathUtil
     {
-        public static string GetDesignedPrefabPath(WorldLevelType levelType, int levelSubtype)
+        public static string GetDesignedPrefabPath(WorldLevelId levelId)
         {
-            return GetDesignedPrefabDirectoryPath(levelType) + "/" + GetDesignedPrefabName(levelType, levelSubtype) + ".prefab";
+            return GetDesignedPrefabDirectoryPath(levelId.Type) + "/" + GetDesignedPrefabName(levelId) + ".prefab";
         }
 
         public static string GetDesignedPrefabDirectoryPath(WorldLevelType levelType)
@@ -23,34 +23,34 @@ namespace ICouldGames.DefenseOfThrones.World.Level.DirectoryPath
             throw new Exception("Not supported WorldLevelType");
         }
 
-        public static string GetPrefabName(WorldLevelType levelType, int levelSubtype)
+        public static string GetPrefabName(WorldLevelId levelId)
         {
-            if (levelType == WorldLevelType.Normal)
-                return "WorldLevel_Normal_" + levelSubtype;
-            if (levelType == WorldLevelType.Endless)
-                return "WorldLevel_Endless_" + levelSubtype;
+            if (levelId.Type == WorldLevelType.Normal)
+                return "WorldLevel_Normal_" + levelId.Subtype;
+            if (levelId.Type == WorldLevelType.Endless)
+                return "WorldLevel_Endless_" + levelId.Subtype;
 
             throw new Exception("Not supported WorldLevelType");
         }
 
-        public static string GetProcessedPrefabName(WorldLevelType levelType, int levelSubtype)
+        public static string GetProcessedPrefabName(WorldLevelId levelId)
         {
-            return "Processed_" + GetPrefabName(levelType, levelSubtype);
+            return "Processed_" + GetPrefabName(levelId);
         }
 
-        public static string GetDesignedPrefabName(WorldLevelType levelType, int levelSubtype)
+        public static string GetDesignedPrefabName(WorldLevelId levelId)
         {
-            return "Designed_" + GetPrefabName(levelType, levelSubtype);
+            return "Designed_" + GetPrefabName(levelId);
         }
 
-        public static string GetProcessedPrefabPath(WorldLevelType levelType, int levelSubtype)
+        public static string GetProcessedPrefabPath(WorldLevelId levelId)
         {
-            return GetProcessedPrefabDirectoryPath(levelType) + "/" + GetProcessedPrefabName(levelType, levelSubtype) + ".prefab";
+            return GetProcessedPrefabDirectoryPath(levelId.Type) + "/" + GetProcessedPrefabName(levelId) + ".prefab";
         }
 
         public static string GetProcessedPrefabResourcesPath(WorldLevelId levelId)
         {
-            return GetProcessedPrefabResourcesDirectoryPath(levelId.Type) + "/" + GetProcessedPrefabName(levelId.Type, levelId.Subtype);
+            return GetProcessedPrefabResourcesDirectoryPath(levelId.Type) + "/" + GetProcessedPrefabName(levelId);
         }
 
         public static string GetProcessedPrefabDirectoryPath(WorldLevelType levelType)
