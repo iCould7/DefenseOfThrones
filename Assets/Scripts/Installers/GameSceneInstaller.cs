@@ -1,5 +1,5 @@
 ﻿using ICouldGames.DefenseOfThrones.Installers.Constants;
-using ICouldGames.DefenseOfThrones.World.Level.Managers.LevelLoad.Implementations;
+using ICouldGames.DefenseOfThrones.World.Level.Self.Managers.LevelLoad.Implementations;
 using Zenject;
 
 namespace ICouldGames.DefenseOfThrones.Installers
