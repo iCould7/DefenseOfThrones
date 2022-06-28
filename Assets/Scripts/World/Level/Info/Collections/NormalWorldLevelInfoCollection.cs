@@ -12,7 +12,6 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Info.Collections
         public NormalWorldLevelInfo FirstLevelInfo { get; private set; }
         [NonSerialized] public Dictionary<WorldLevelId, NormalWorldLevelInfo> LevelInfosById = new();
 
-
         public void OnBeforeSerialize()
         {
         }

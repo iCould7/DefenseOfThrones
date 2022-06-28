@@ -12,7 +12,6 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Info.Collections
         public EndlessWorldLevelInfo DefaultEndlessLevel { get; private set; }
         [NonSerialized] public Dictionary<WorldLevelId, EndlessWorldLevelInfo> LevelInfosById = new();
 
-
         public void OnBeforeSerialize()
         {
         }

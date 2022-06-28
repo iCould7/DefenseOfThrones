@@ -1,5 +1,5 @@
 ﻿using System;
-using ICouldGames.DefenseOfThrones.World.Level.Types;
+using ICouldGames.DefenseOfThrones.World.Level.Enums;
 using UnityEngine;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Id

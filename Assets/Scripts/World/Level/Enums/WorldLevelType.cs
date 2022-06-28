@@ -1,4 +1,4 @@
-﻿namespace ICouldGames.DefenseOfThrones.World.Level.Types
+﻿namespace ICouldGames.DefenseOfThrones.World.Level.Enums
 {
     public enum WorldLevelType
     {

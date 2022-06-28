@@ -1,6 +1,6 @@
 ﻿using System;
 using ICouldGames.DefenseOfThrones.World.Design.Constants;
-using ICouldGames.DefenseOfThrones.World.Level.Types;
+using ICouldGames.DefenseOfThrones.World.Level.Enums;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.DirectoryPath
 {
