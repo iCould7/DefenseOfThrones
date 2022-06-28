@@ -6,5 +6,6 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Managers.LevelLoad
     public interface IWorldLevelLoadManager : IInitializable
     {
         void LoadLevel(WorldLevelInfo levelInfo);
+        void UnloadActiveLevel();
     }
 }

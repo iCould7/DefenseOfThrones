@@ -13,6 +13,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Managers.LevelLoad.Implementa
 
         private CombinedWorldLevelInfoCollections _worldLevelInfoCollections;
         private Transform _myTransform;
+        private ProcessedWorldLevel _activeLevel;
 
         public void Awake()
         {
@@ -28,9 +29,19 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Managers.LevelLoad.Implementa
 
         public void LoadLevel(WorldLevelInfo levelInfo)
         {
+            UnloadActiveLevel();
             var levelResourcesPath = WorldLevelPathUtil.GetProcessedPrefabResourcesPath(levelInfo._Id);
-            var loadedLevel = _diContainer.InstantiatePrefabResourceForComponent<ProcessedWorldLevel>(levelResourcesPath, _myTransform);
-            loadedLevel._MyTransform.name = loadedLevel._MyTransform.name.Replace("(Clone)", "");
+            _activeLevel = _diContainer.InstantiatePrefabResourceForComponent<ProcessedWorldLevel>(levelResourcesPath, _myTransform);
+            _activeLevel._MyTransform.name = _activeLevel._MyTransform.name.Replace("(Clone)", "");
+        }
+
+        public void UnloadActiveLevel()
+        {
+            if (_activeLevel != null)
+            {
+                Destroy(_activeLevel);
+                _activeLevel = null;
+            }
         }
     }
 }
