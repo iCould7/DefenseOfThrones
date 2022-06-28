@@ -33,6 +33,8 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Info.Collections.Combine
 
         public void OnAfterDeserialize()
         {
+            _NormalWorldLevelInfoCollection.InitFields();
+            _EndlessWorldLevelInfoCollection.InitFields();
             FillWorldLevelInfos();
             FillInfoCollectionsByLevelInfoType();
         }

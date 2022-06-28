@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-
-namespace ICouldGames.DefenseOfThrones.World.Level.Self.Info.Collections
+﻿namespace ICouldGames.DefenseOfThrones.World.Level.Self.Info.Collections
 {
-    public interface IWorldLevelInfoCollection : ISerializationCallbackReceiver
+    public interface IWorldLevelInfoCollection
     {
         WorldLevelInfo GetDefaultWorldLevelInfo();
     }

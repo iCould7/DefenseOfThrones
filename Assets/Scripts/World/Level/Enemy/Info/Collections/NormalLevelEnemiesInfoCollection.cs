@@ -6,18 +6,14 @@ using UnityEngine;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Collections
 {
-    [CreateAssetMenu(fileName = "NormalLevelEnemiesInfoCollection", menuName = "Collections/LevelEnemies/NormalLevelEnemiesInfoCollection", order = 2)]
-    public class NormalLevelEnemiesInfoCollection : ScriptableObject, ISerializationCallbackReceiver
+    [Serializable]
+    public class NormalLevelEnemiesInfoCollection
     {
         [SerializeField] private List<SerializableKeyValuePair<WorldLevelId, NormalLevelEnemiesInfo>> _EnemiesInfo;
 
         [NonSerialized] public Dictionary<WorldLevelId, NormalLevelEnemiesInfo> EnemiesInfosByLevelId = new();
 
-        public void OnBeforeSerialize()
-        {
-        }
-
-        public void OnAfterDeserialize()
+        public void FillEnemiesInfosByLevelId()
         {
             EnemiesInfosByLevelId.Clear();
             foreach (var keyValuePair in _EnemiesInfo)

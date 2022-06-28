@@ -5,19 +5,15 @@ using UnityEngine;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Self.Info.Collections.Implementations
 {
-    [CreateAssetMenu(fileName = "NormalWorldLevelInfoCollection", menuName = "Collections/WorldLevel/NormalWorldLevelInfoCollection", order = 2)]
-    public class NormalWorldLevelInfoCollection : ScriptableObject, IWorldLevelInfoCollection
+    [Serializable]
+    public class NormalWorldLevelInfoCollection : IWorldLevelInfoCollection
     {
         [SerializeField] private List<NormalWorldLevelInfo> _LevelInfos;
 
         [NonSerialized] public Dictionary<WorldLevelId, NormalWorldLevelInfo> LevelInfosById = new();
         private NormalWorldLevelInfo _firstLevelInfo;
 
-        public void OnBeforeSerialize()
-        {
-        }
-
-        public void OnAfterDeserialize()
+        public void InitFields()
         {
             if (_LevelInfos.Count > 0)
             {

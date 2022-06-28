@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Collections.Combined
 {
-    [CreateAssetMenu(fileName = "CombinedLevelEnemiesInfoCollection", menuName = "Collections/LevelEnemies/CombinedLevelEnemiesInfoCollection", order = 1)]
+    [CreateAssetMenu(fileName = "CombinedLevelEnemiesInfoCollection", menuName = "Collections/LevelEnemies/CombinedLevelEnemiesInfoCollections", order = 1)]
     public class CombinedLevelEnemiesInfoCollections : ScriptableObject, ISerializationCallbackReceiver
     {
         [SerializeField] private NormalLevelEnemiesInfoCollection _NormalLevelEnemiesInfoCollection;
@@ -25,6 +25,8 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Collections.Combin
 
         public void OnAfterDeserialize()
         {
+            _NormalLevelEnemiesInfoCollection.FillEnemiesInfosByLevelId();
+            _EndlessLevelEnemiesInfoCollection.FillEnemiesInfosByLevelId();
             FillLevelEnemiesInfos();
         }
 

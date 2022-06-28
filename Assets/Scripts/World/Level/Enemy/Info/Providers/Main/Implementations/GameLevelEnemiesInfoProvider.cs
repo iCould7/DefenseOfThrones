@@ -1,7 +1,7 @@
 ﻿using ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Collections.Combined;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Id;
-using Unity.VisualScripting;
 using UnityEngine;
+using Zenject;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Managers.Main.Implementations
 {
