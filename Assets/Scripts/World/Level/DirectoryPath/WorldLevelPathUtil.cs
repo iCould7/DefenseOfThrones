@@ -1,6 +1,8 @@
 ﻿using System;
 using ICouldGames.DefenseOfThrones.World.Design.Constants;
+using ICouldGames.DefenseOfThrones.World.Level.DirectoryPath.Constants;
 using ICouldGames.DefenseOfThrones.World.Level.Enums;
+using ICouldGames.DefenseOfThrones.World.Level.Id;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.DirectoryPath
 {
@@ -46,12 +48,27 @@ namespace ICouldGames.DefenseOfThrones.World.Level.DirectoryPath
             return GetProcessedPrefabDirectoryPath(levelType) + "/" + GetProcessedPrefabName(levelType, levelSubtype) + ".prefab";
         }
 
+        public static string GetProcessedPrefabResourcesPath(WorldLevelId levelId)
+        {
+            return GetProcessedPrefabResourcesDirectoryPath(levelId.Type) + "/" + GetProcessedPrefabName(levelId.Type, levelId.Subtype);
+        }
+
         public static string GetProcessedPrefabDirectoryPath(WorldLevelType levelType)
         {
             if (levelType == WorldLevelType.Normal)
                 return WorldDesignConstants.PROCESSED_NORMAL_LEVELS_DIRECTORY;
             if (levelType == WorldLevelType.Endless)
                 return WorldDesignConstants.PROCESSED_ENDLESS_LEVELS_DIRECTORY;
+
+            throw new Exception("Not supported WorldLevelType");
+        }
+
+        public static string GetProcessedPrefabResourcesDirectoryPath(WorldLevelType levelType)
+        {
+            if (levelType == WorldLevelType.Normal)
+                return WorldLevelResourcesPathConstants.PROCESSED_NORMAL_LEVELS_RESOURCES_DIRECTORY;
+            if (levelType == WorldLevelType.Endless)
+                return WorldLevelResourcesPathConstants.PROCESSED_ENDLESS_LEVELS_RESOURCES_DIRECTORY;
 
             throw new Exception("Not supported WorldLevelType");
         }

@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c4ef52c102452d8bbb6c4dcdd37449, type: 3}
   m_Name: EndlessWorldLevelInfoCollection
   m_EditorClassIdentifier: 
-  _LevelInfos: []
+  _LevelInfos:
+  - _Id:
+      _Type: 2
+      _Subtype: 0

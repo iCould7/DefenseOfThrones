@@ -6,6 +6,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Components
 {
     public class ProcessedWorldLevel : MonoBehaviour
     {
+        [ReadOnly] public Transform _MyTransform;
         [ReadOnly] public WorldLevelData _LevelData;
     }
 }

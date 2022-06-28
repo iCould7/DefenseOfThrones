@@ -1,4 +1,6 @@
-﻿using Zenject;
+﻿using ICouldGames.DefenseOfThrones.Installers.Constants;
+using ICouldGames.DefenseOfThrones.World.Level.Managers.LevelLoad.Implementations;
+using Zenject;
 
 namespace ICouldGames.DefenseOfThrones.Installers
 {
@@ -8,7 +10,8 @@ namespace ICouldGames.DefenseOfThrones.Installers
         {
             CommonInstaller.Install(Container);
 
-
+            Container.BindInterfacesAndSelfTo<GameWorldLevelLoadManager>().FromNewComponentOnNewGameObject()
+                .UnderTransformGroup(InstallerConstants.INSTALLED_BINDINGS_ROOT_NAME).AsSingle().NonLazy();
         }
     }
 }

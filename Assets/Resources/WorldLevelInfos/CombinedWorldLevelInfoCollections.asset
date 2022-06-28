@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239c337e13eb48869136f234667d69b0, type: 3}
   m_Name: CombinedWorldLevelInfoCollections
   m_EditorClassIdentifier: 
-  _NormalWorldLevelInfoCollection: {fileID: 0}
-  _EndlessWorldLevelInfoCollection: {fileID: 0}
+  _NormalWorldLevelInfoCollection: {fileID: 11400000, guid: 41b0dd39946626c48923aa2c6fd259cf, type: 2}
+  _EndlessWorldLevelInfoCollection: {fileID: 11400000, guid: afb5990a9d8f1d541ba340cfcfc6f6ed, type: 2}

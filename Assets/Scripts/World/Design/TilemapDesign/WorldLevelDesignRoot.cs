@@ -99,6 +99,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
             // Set Main processed component
             var processedLevel = processedLevelGO.AddComponent<ProcessedWorldLevel>();
             processedLevel._LevelData = worldLevelData;
+            processedLevel._MyTransform = processedLevelTransform;
 
             // Remove not wanted components
             var processedPathLayerGO = processedPathGridLayer.gameObject;
