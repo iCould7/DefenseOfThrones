@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa444c4de7f4efaa2048c3a23ef8f40, type: 3}
   m_Name: NormalLevelEnemiesInfoCollection
   m_EditorClassIdentifier: 
-  _EnemiesInfo: []
+  _EnemiesInfo:
+  - _Key:
+      _Type: 1
+      _Subtype: 0
+    _Value:
+      _Hp: 100
+      _MoveSpeed: 2

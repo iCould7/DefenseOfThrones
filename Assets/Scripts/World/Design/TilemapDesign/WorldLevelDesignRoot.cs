@@ -1,5 +1,6 @@
 ﻿#if UNITY_EDITOR
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +10,7 @@ using ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLayer;
 using ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.TowerLayer;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Data;
 using ICouldGames.DefenseOfThrones.World.Level.Self.DirectoryPath;
+using ICouldGames.DefenseOfThrones.World.Level.Self.Enums;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Id;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Processed;
 using NaughtyAttributes;
@@ -96,10 +98,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
                 worldLevelData._TowerSlots.Add(slotTransform);
             }
 
-            // Set Main processed component
-            var processedLevel = processedLevelGO.AddComponent<ProcessedWorldLevel>();
-            processedLevel._LevelData = worldLevelData;
-            processedLevel._MyTransform = processedLevelTransform;
+            SetProcessedLevelComponent();
 
             // Remove not wanted components
             var processedPathLayerGO = processedPathGridLayer.gameObject;
@@ -110,7 +109,30 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
             DestroyImmediate(processedTowerLayerGO.GetComponent<TowerGridLayerGizmo>());
 
             return processedLevelGO;
+
+            #region Local Functions
+            void SetProcessedLevelComponent()
+            {
+                ProcessedWorldLevel processedLevel;
+                if (_LevelId.Type == WorldLevelType.Normal)
+                {
+                    processedLevel = processedLevelGO.AddComponent<ProcessedNormalWorldLevel>();
+                }
+                else if (_LevelId.Type == WorldLevelType.Endless)
+                {
+                    processedLevel = processedLevelGO.AddComponent<ProcessedEndlessWorldLevel>();
+                }
+                else
+                {
+                    throw new Exception("Not supported WorldLevelType!");
+                }
+
+                processedLevel._LevelData = worldLevelData;
+                processedLevel._MyTransform = processedLevelTransform;
+            }
+            #endregion
         }
+
 
         private void SavePrefab()
         {

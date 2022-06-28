@@ -1,4 +1,6 @@
-﻿using ICouldGames.DefenseOfThrones.World.Level.Self.DirectoryPath;
+﻿using System.Collections;
+using ICouldGames.DefenseOfThrones.Utils.MonoBehaviourUtils.Singletons;
+using ICouldGames.DefenseOfThrones.World.Level.Self.DirectoryPath;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Info;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Info.Managers.Main;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Processed;
@@ -11,12 +13,13 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Managers.LevelLoad.Imple
     {
         [Inject] private DiContainer _diContainer;
         [Inject] private IWorldLevelInfoProvider _worldLevelInfoProvider;
+        [Inject] private EverlastingMonoBehaviour _everlastingMono;
 
         private ProcessedWorldLevel _activeLevel;
 
         public void Initialize()
         {
-            var defaultEndlessLevelInfo = _worldLevelInfoProvider.GetDefaultWorldLevelInfo<EndlessWorldLevelInfo>();
+            var defaultEndlessLevelInfo = _worldLevelInfoProvider.GetDefaultWorldLevelInfo<NormalWorldLevelInfo>();
             LoadLevel(defaultEndlessLevelInfo);
         }
 
@@ -26,15 +29,24 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Managers.LevelLoad.Imple
             var levelResourcesPath = WorldLevelPathUtil.GetProcessedPrefabResourcesPath(levelInfo.Id);
             _activeLevel = _diContainer.InstantiatePrefabResourceForComponent<ProcessedWorldLevel>(levelResourcesPath);
             _activeLevel._MyTransform.name = _activeLevel._MyTransform.name.Replace("(Clone)", "");
+
+            _everlastingMono.StartCoroutine(UnloadRoutine());
         }
 
         public void UnloadActiveLevel()
         {
             if (_activeLevel != null)
             {
-                Object.Destroy(_activeLevel);
+                Object.Destroy(_activeLevel.gameObject);
                 _activeLevel = null;
             }
+        }
+
+        private IEnumerator UnloadRoutine()
+        {
+            yield return new WaitForSeconds(2f);
+
+            UnloadActiveLevel();
         }
     }
 }

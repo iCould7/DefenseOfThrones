@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00060cdca00c4aeda464c59079381f97, type: 3}
   m_Name: NormalWorldLevelInfoCollection
   m_EditorClassIdentifier: 
-  _LevelInfos: []
+  _LevelInfos:
+  - _Id:
+      _Type: 1
+      _Subtype: 0
+    _NextLevelId:
+      _Type: 1
+      _Subtype: 1
