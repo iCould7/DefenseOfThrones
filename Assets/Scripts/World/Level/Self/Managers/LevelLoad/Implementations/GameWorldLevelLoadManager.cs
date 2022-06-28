@@ -1,37 +1,30 @@
 ﻿using ICouldGames.DefenseOfThrones.World.Level.Self.DirectoryPath;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Info;
-using ICouldGames.DefenseOfThrones.World.Level.Self.Info.Collections.Combined;
+using ICouldGames.DefenseOfThrones.World.Level.Self.Info.Managers.Main;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Processed;
 using UnityEngine;
 using Zenject;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Self.Managers.LevelLoad.Implementations
 {
-    public class GameWorldLevelLoadManager : MonoBehaviour, IWorldLevelLoadManager
+    public class GameWorldLevelLoadManager : IInitializable, IWorldLevelLoadManager
     {
         [Inject] private DiContainer _diContainer;
+        [Inject] private IWorldLevelInfoManager _worldLevelInfoManager;
 
-        private CombinedWorldLevelInfoCollections _worldLevelInfoCollections;
-        private Transform _myTransform;
         private ProcessedWorldLevel _activeLevel;
-
-        public void Awake()
-        {
-            _myTransform = transform;
-            _worldLevelInfoCollections = Resources.Load<CombinedWorldLevelInfoCollections>(CombinedWorldLevelInfoCollections.RESOURCES_PATH);
-        }
 
         public void Initialize()
         {
-            var defaultEndlessLevelInfo = _worldLevelInfoCollections.GetDefaultWorldLevelInfo<EndlessWorldLevelInfo>();
+            var defaultEndlessLevelInfo = _worldLevelInfoManager.GetDefaultWorldLevelInfo<EndlessWorldLevelInfo>();
             LoadLevel(defaultEndlessLevelInfo);
         }
 
         public void LoadLevel(WorldLevelInfo levelInfo)
         {
             UnloadActiveLevel();
-            var levelResourcesPath = WorldLevelPathUtil.GetProcessedPrefabResourcesPath(levelInfo._Id);
-            _activeLevel = _diContainer.InstantiatePrefabResourceForComponent<ProcessedWorldLevel>(levelResourcesPath, _myTransform);
+            var levelResourcesPath = WorldLevelPathUtil.GetProcessedPrefabResourcesPath(levelInfo.Id);
+            _activeLevel = _diContainer.InstantiatePrefabResourceForComponent<ProcessedWorldLevel>(levelResourcesPath);
             _activeLevel._MyTransform.name = _activeLevel._MyTransform.name.Replace("(Clone)", "");
         }
 
@@ -39,7 +32,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Managers.LevelLoad.Imple
         {
             if (_activeLevel != null)
             {
-                Destroy(_activeLevel);
+                Object.Destroy(_activeLevel);
                 _activeLevel = null;
             }
         }

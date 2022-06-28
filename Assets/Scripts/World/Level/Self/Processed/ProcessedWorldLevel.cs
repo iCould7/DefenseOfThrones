@@ -1,4 +1,4 @@
-﻿using ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Self.Implementations.Abstract;
+﻿using ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Main.Implementations.Abstract;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Data;
 using NaughtyAttributes;
 using UnityEngine;

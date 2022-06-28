@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Self.Info.Collections.Implementations
 {
-    [CreateAssetMenu(fileName = "EndlessWorldLevelInfoCollection", menuName = "Collections/EndlessWorldLevelInfoCollection", order = 3)]
+    [CreateAssetMenu(fileName = "EndlessWorldLevelInfoCollection", menuName = "Collections/WorldLevel/EndlessWorldLevelInfoCollection", order = 3)]
     public class EndlessWorldLevelInfoCollection : ScriptableObject, IWorldLevelInfoCollection
     {
         [SerializeField] private List<EndlessWorldLevelInfo> _LevelInfos;
@@ -27,7 +27,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Info.Collections.Impleme
             LevelInfosById.Clear();
             foreach (var levelInfo in _LevelInfos)
             {
-                LevelInfosById[levelInfo._Id] = levelInfo;
+                LevelInfosById[levelInfo.Id] = levelInfo;
             }
         }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Self.Info.Collections.Implementations
 {
-    [CreateAssetMenu(fileName = "NormalWorldLevelInfoCollection", menuName = "Collections/NormalWorldLevelInfoCollection", order = 2)]
+    [CreateAssetMenu(fileName = "NormalWorldLevelInfoCollection", menuName = "Collections/WorldLevel/NormalWorldLevelInfoCollection", order = 2)]
     public class NormalWorldLevelInfoCollection : ScriptableObject, IWorldLevelInfoCollection
     {
         [SerializeField] private List<NormalWorldLevelInfo> _LevelInfos;
@@ -27,7 +27,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Info.Collections.Impleme
             LevelInfosById.Clear();
             foreach (var levelInfo in _LevelInfos)
             {
-                LevelInfosById[levelInfo._Id] = levelInfo;
+                LevelInfosById[levelInfo.Id] = levelInfo;
             }
         }
 

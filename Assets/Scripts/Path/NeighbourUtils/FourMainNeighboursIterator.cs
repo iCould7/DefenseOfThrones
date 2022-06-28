@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ICouldGames.DefenseOfThrones.World.Paths.NeighbourUtils
+namespace ICouldGames.DefenseOfThrones.Path.NeighbourUtils
 {
     public class FourMainNeighboursIterator : IEnumerable<Vector2Int>, IDisposable
     {

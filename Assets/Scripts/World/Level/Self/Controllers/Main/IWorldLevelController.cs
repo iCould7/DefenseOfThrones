@@ -1,4 +1,4 @@
-﻿namespace ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Self
+﻿namespace ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Main
 {
     public interface IWorldLevelController
     {

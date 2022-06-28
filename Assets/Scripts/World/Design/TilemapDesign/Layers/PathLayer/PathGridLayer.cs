@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using ICouldGames.DefenseOfThrones.World.Paths.NeighbourUtils;
+using ICouldGames.DefenseOfThrones.Path.NeighbourUtils;
 using NaughtyAttributes;
 using Unity.EditorCoroutines.Editor;
 using UnityEditor;

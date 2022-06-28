@@ -1,4 +1,5 @@
-﻿using ICouldGames.DefenseOfThrones.Installers.Constants;
+﻿using ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Managers.Main.Implementations;
+using ICouldGames.DefenseOfThrones.World.Level.Self.Info.Managers.Main.Implementations;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Managers.LevelLoad.Implementations;
 using Zenject;
 
@@ -10,8 +11,12 @@ namespace ICouldGames.DefenseOfThrones.Installers
         {
             CommonInstaller.Install(Container);
 
-            Container.BindInterfacesAndSelfTo<GameWorldLevelLoadManager>().FromNewComponentOnNewGameObject()
-                .UnderTransformGroup(InstallerConstants.INSTALLED_BINDINGS_ROOT_NAME).AsSingle().NonLazy();
+            #region InfoManagers
+            Container.BindInterfacesAndSelfTo<GameWorldLevelInfoManager>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<GameLevelEnemiesInfoManager>().AsSingle().NonLazy();
+            #endregion
+
+            Container.BindInterfacesAndSelfTo<GameWorldLevelLoadManager>().AsSingle().NonLazy();
         }
     }
 }

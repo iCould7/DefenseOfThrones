@@ -1,8 +1,8 @@
 ﻿#if UNITY_EDITOR
 
 using System.Collections.Generic;
+using ICouldGames.DefenseOfThrones.Path.NeighbourUtils;
 using ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLayer;
-using ICouldGames.DefenseOfThrones.World.Paths.NeighbourUtils;
 using UnityEngine;
 
 namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.TowerLayer

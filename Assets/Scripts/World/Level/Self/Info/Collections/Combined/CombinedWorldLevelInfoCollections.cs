@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Self.Info.Collections.Combined
 {
-    [CreateAssetMenu(fileName = "CombinedWorldLevelInfoCollections", menuName = "Collections/CombinedWorldLevelInfoCollections", order = 1)]
+    [CreateAssetMenu(fileName = "CombinedWorldLevelInfoCollections", menuName = "Collections/WorldLevel/CombinedWorldLevelInfoCollections", order = 1)]
     public class CombinedWorldLevelInfoCollections : ScriptableObject, ISerializationCallbackReceiver
     {
         [SerializeField] private NormalWorldLevelInfoCollection _NormalWorldLevelInfoCollection;
