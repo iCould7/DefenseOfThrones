@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using ICouldGames.DefenseOfThrones.World.Level.Id;
 using UnityEngine;
 
-namespace ICouldGames.DefenseOfThrones.World.Level.Info.Collections
+namespace ICouldGames.DefenseOfThrones.World.Level.Info.Collections.Implementations
 {
-    public class EndlessWorldLevelInfoCollection : ScriptableObject, ISerializationCallbackReceiver
+    [CreateAssetMenu(fileName = "EndlessWorldLevelInfoCollection", menuName = "Collections/EndlessWorldLevelInfoCollection", order = 3)]
+    public class EndlessWorldLevelInfoCollection : ScriptableObject, IWorldLevelInfoCollection
     {
         [SerializeField] private List<EndlessWorldLevelInfo> _LevelInfos;
 
-        public EndlessWorldLevelInfo DefaultEndlessLevel { get; private set; }
         [NonSerialized] public Dictionary<WorldLevelId, EndlessWorldLevelInfo> LevelInfosById = new();
+        private EndlessWorldLevelInfo _defaultEndlessLevel;
 
         public void OnBeforeSerialize()
         {
@@ -20,7 +21,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Info.Collections
         {
             if (_LevelInfos.Count > 0)
             {
-                DefaultEndlessLevel = _LevelInfos[0];
+                _defaultEndlessLevel = _LevelInfos[0];
             }
 
             LevelInfosById.Clear();
@@ -28,6 +29,11 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Info.Collections
             {
                 LevelInfosById[levelInfo._Id] = levelInfo;
             }
+        }
+
+        public WorldLevelInfo GetDefaultWorldLevelInfo()
+        {
+            return _defaultEndlessLevel;
         }
     }
 }

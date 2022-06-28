@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using ICouldGames.DefenseOfThrones.World.Level.Id;
 using UnityEngine;
 
-namespace ICouldGames.DefenseOfThrones.World.Level.Info.Collections
+namespace ICouldGames.DefenseOfThrones.World.Level.Info.Collections.Implementations
 {
-    public class NormalWorldLevelInfoCollection : ScriptableObject, ISerializationCallbackReceiver
+    [CreateAssetMenu(fileName = "NormalWorldLevelInfoCollection", menuName = "Collections/NormalWorldLevelInfoCollection", order = 2)]
+    public class NormalWorldLevelInfoCollection : ScriptableObject, IWorldLevelInfoCollection
     {
         [SerializeField] private List<NormalWorldLevelInfo> _LevelInfos;
 
-        public NormalWorldLevelInfo FirstLevelInfo { get; private set; }
         [NonSerialized] public Dictionary<WorldLevelId, NormalWorldLevelInfo> LevelInfosById = new();
+        private NormalWorldLevelInfo _firstLevelInfo;
 
         public void OnBeforeSerialize()
         {
@@ -20,7 +21,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Info.Collections
         {
             if (_LevelInfos.Count > 0)
             {
-                FirstLevelInfo = _LevelInfos[0];
+                _firstLevelInfo = _LevelInfos[0];
             }
 
             LevelInfosById.Clear();
@@ -28,6 +29,11 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Info.Collections
             {
                 LevelInfosById[levelInfo._Id] = levelInfo;
             }
+        }
+
+        public WorldLevelInfo GetDefaultWorldLevelInfo()
+        {
+            return _firstLevelInfo;
         }
     }
 }
