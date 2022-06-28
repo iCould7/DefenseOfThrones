@@ -10,13 +10,13 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Managers.LevelLoad.Imple
     public class GameWorldLevelLoadManager : IInitializable, IWorldLevelLoadManager
     {
         [Inject] private DiContainer _diContainer;
-        [Inject] private IWorldLevelInfoManager _worldLevelInfoManager;
+        [Inject] private IWorldLevelInfoProvider _worldLevelInfoProvider;
 
         private ProcessedWorldLevel _activeLevel;
 
         public void Initialize()
         {
-            var defaultEndlessLevelInfo = _worldLevelInfoManager.GetDefaultWorldLevelInfo<EndlessWorldLevelInfo>();
+            var defaultEndlessLevelInfo = _worldLevelInfoProvider.GetDefaultWorldLevelInfo<EndlessWorldLevelInfo>();
             LoadLevel(defaultEndlessLevelInfo);
         }
 

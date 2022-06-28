@@ -12,8 +12,8 @@ namespace ICouldGames.DefenseOfThrones.Installers
             CommonInstaller.Install(Container);
 
             #region InfoManagers
-            Container.BindInterfacesAndSelfTo<GameWorldLevelInfoManager>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<GameLevelEnemiesInfoManager>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<GameWorldLevelInfoProvider>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<GameLevelEnemiesInfoProvider>().AsSingle().NonLazy();
             #endregion
 
             Container.BindInterfacesAndSelfTo<GameWorldLevelLoadManager>().AsSingle().NonLazy();

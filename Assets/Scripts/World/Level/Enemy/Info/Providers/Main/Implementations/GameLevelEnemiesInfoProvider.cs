@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Managers.Main.Implementations
 {
-    public class GameLevelEnemiesInfoManager : IInitializable, ILevelEnemiesInfoManager
+    public class GameLevelEnemiesInfoProvider : IInitializable, ILevelEnemiesInfoProvider
     {
         private CombinedLevelEnemiesInfoCollections _levelEnemiesInfoCollections;
 

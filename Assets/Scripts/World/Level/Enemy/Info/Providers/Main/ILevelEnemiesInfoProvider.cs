@@ -2,7 +2,7 @@
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Managers.Main
 {
-    public interface ILevelEnemiesInfoManager
+    public interface ILevelEnemiesInfoProvider
     {
         T GetLevelEnemiesInfo<T>(WorldLevelId levelId) where T : LevelEnemiesInfo;
     }

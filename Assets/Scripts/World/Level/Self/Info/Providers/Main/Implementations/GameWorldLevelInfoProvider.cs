@@ -5,7 +5,7 @@ using Zenject;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Self.Info.Managers.Main.Implementations
 {
-    public class GameWorldLevelInfoManager : IInitializable, IWorldLevelInfoManager
+    public class GameWorldLevelInfoProvider : IInitializable, IWorldLevelInfoProvider
     {
         private CombinedWorldLevelInfoCollections _worldLevelInfoCollections;
 
