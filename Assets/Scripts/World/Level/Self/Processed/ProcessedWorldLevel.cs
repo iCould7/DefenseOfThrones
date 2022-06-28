@@ -13,6 +13,11 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Processed
         [ReadOnly] public Transform _MyTransform;
         [ReadOnly] public WorldLevelData _LevelData;
 
+        public void Init()
+        {
+            _worldLevelController.Init(_LevelData);
+        }
+
         private void OnDestroy()
         {
             _worldLevelController.Deactivate();

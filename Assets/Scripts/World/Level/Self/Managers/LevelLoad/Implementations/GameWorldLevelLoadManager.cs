@@ -26,11 +26,13 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Managers.LevelLoad.Imple
         public void LoadLevel(WorldLevelInfo levelInfo)
         {
             UnloadActiveLevel();
+
             var levelResourcesPath = WorldLevelPathUtil.GetProcessedPrefabResourcesPath(levelInfo.Id);
             _activeLevel = _diContainer.InstantiatePrefabResourceForComponent<ProcessedWorldLevel>(levelResourcesPath);
             _activeLevel._MyTransform.name = _activeLevel._MyTransform.name.Replace("(Clone)", "");
+            _activeLevel.Init();
 
-            _everlastingMono.StartCoroutine(UnloadRoutine());
+            _everlastingMono.StartCoroutine(UnloadCoroutine());
         }
 
         public void UnloadActiveLevel()
@@ -42,11 +44,14 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Managers.LevelLoad.Imple
             }
         }
 
-        private IEnumerator UnloadRoutine()
+        private IEnumerator UnloadCoroutine()
         {
             yield return new WaitForSeconds(2f);
 
             UnloadActiveLevel();
+
+            yield return new WaitForSeconds(1f);
+            Initialize();
         }
     }
 }

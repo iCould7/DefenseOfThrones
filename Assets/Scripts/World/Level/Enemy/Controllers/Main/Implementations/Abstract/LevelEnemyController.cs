@@ -1,17 +1,46 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using ICouldGames.DefenseOfThrones.Utils.MonoBehaviourUtils.Singletons;
+using ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Managers.Main;
+using ICouldGames.DefenseOfThrones.World.Level.Self.Data;
+using UnityEngine;
+using Zenject;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implementations.Abstract
 {
-    public class LevelEnemyController : MonoBehaviour, ILevelEnemyController
+    public abstract class LevelEnemyController : ILevelEnemyController
     {
-        public void Init()
+        [Inject] protected ILevelEnemiesInfoProvider LevelEnemiesInfoProvider;
+        [Inject] protected EverlastingMonoBehaviour EverlastingMono;
+
+        protected WorldLevelData LevelData;
+
+        public virtual void Init(WorldLevelData levelData)
         {
-            throw new System.NotImplementedException();
+            LevelData = levelData;
         }
 
-        public bool CanSpawnEnemy()
+        public void StartSpawningEnemies()
         {
-            throw new System.NotImplementedException();
+            EverlastingMono.StartCoroutine(StartSpawningEnemiesCoroutine());
         }
+
+        private IEnumerator StartSpawningEnemiesCoroutine()
+        {
+            while (!IsEnemySpawnsDepleted())
+            {
+                if (CanSpawnNextEnemy())
+                {
+                    SpawnEnemy();
+                }
+                else
+                {
+                    yield return new WaitUntil(CanSpawnNextEnemy);
+                }
+            }
+        }
+
+        public abstract void SpawnEnemy();
+        public abstract bool IsEnemySpawnsDepleted();
+        public abstract bool CanSpawnNextEnemy();
     }
 }
