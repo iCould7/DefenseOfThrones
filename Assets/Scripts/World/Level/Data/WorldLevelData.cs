@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ICouldGames.DefenseOfThrones.World.Level.Types;
+using ICouldGames.DefenseOfThrones.World.Level.Id;
 using UnityEngine;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Data
@@ -8,8 +8,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Data
     [Serializable]
     public class WorldLevelData
     {
-        public WorldLevelType _Type;
-        public int _Subtype;
+        public WorldLevelId _Id = new();
         public List<Transform> _OrderedWaypoints = new();
         public List<Transform> _TowerSlots = new();
     }

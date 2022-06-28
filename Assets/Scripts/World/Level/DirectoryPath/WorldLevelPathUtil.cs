@@ -24,9 +24,9 @@ namespace ICouldGames.DefenseOfThrones.World.Level.DirectoryPath
         public static string GetPrefabName(WorldLevelType levelType, int levelSubtype)
         {
             if (levelType == WorldLevelType.Normal)
-                return "Normal_" + levelSubtype;
+                return "WorldLevel_Normal_" + levelSubtype;
             if (levelType == WorldLevelType.Endless)
-                return "Endless_" + levelSubtype;
+                return "WorldLevel_Endless_" + levelSubtype;
 
             throw new Exception("Not supported WorldLevelType");
         }

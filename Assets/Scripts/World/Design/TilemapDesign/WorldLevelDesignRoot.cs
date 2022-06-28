@@ -9,7 +9,7 @@ using ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.TowerLayer;
 using ICouldGames.DefenseOfThrones.World.Level.Components;
 using ICouldGames.DefenseOfThrones.World.Level.Data;
 using ICouldGames.DefenseOfThrones.World.Level.DirectoryPath;
-using ICouldGames.DefenseOfThrones.World.Level.Types;
+using ICouldGames.DefenseOfThrones.World.Level.Id;
 using ICouldGames.DefenseOfThrones.World.Paths.NeighbourUtils;
 using NaughtyAttributes;
 using Unity.EditorCoroutines.Editor;
@@ -25,8 +25,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
         [SerializeField] private PathGridLayer _PathGridLayer;
         [SerializeField] private TowerGridLayer _TowerGridLayer;
         [SerializeField] private Transform _Grid;
-        [ReadOnly] [SerializeField] private WorldLevelType _LevelType = WorldLevelType.Normal;
-        [ReadOnly] [SerializeField] private int _LevelSubtype = 1;
+        [SerializeField] private WorldLevelId _LevelId;
 
         public bool IsReady { get; private set; } = false;
 
@@ -43,12 +42,12 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
                 SavePrefab();
             }
 
-            if (!Directory.Exists(WorldLevelPathUtil.GetProcessedPrefabDirectoryPath(_LevelType)))
+            if (!Directory.Exists(WorldLevelPathUtil.GetProcessedPrefabDirectoryPath(_LevelId.Type)))
             {
-                Directory.CreateDirectory(WorldLevelPathUtil.GetProcessedPrefabDirectoryPath(_LevelType));
+                Directory.CreateDirectory(WorldLevelPathUtil.GetProcessedPrefabDirectoryPath(_LevelId.Type));
             }
 
-            var processedLevelSavePath = WorldLevelPathUtil.GetProcessedPrefabPath(_LevelType, _LevelSubtype);
+            var processedLevelSavePath = WorldLevelPathUtil.GetProcessedPrefabPath(_LevelId.Type, _LevelId.Subtype);
             var processedLevelPrefab = GenerateProcessedLevelPrefab();
             PrefabUtility.SaveAsPrefabAsset(processedLevelPrefab, processedLevelSavePath);
             DestroyImmediate(processedLevelPrefab.gameObject);
@@ -61,7 +60,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
 
         private GameObject GenerateProcessedLevelPrefab()
         {
-            var processedLevelGO = new GameObject(WorldLevelPathUtil.GetProcessedPrefabName(_LevelType, _LevelSubtype));
+            var processedLevelGO = new GameObject(WorldLevelPathUtil.GetProcessedPrefabName(_LevelId.Type, _LevelId.Subtype));
             var processedLevelTransform = processedLevelGO.transform;
             processedLevelTransform.position = Vector3.zero;
             Instantiate(_Grid, processedLevelTransform).name = "Grid";
@@ -70,8 +69,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
             var processedTowerGridLayer = processedLevelGO.GetComponentInChildren<TowerGridLayer>();
 
             var worldLevelData = new WorldLevelData();
-            worldLevelData._Type = _LevelType;
-            worldLevelData._Subtype = _LevelSubtype;
+            worldLevelData._Id.Copy(_LevelId);
 
             // Instantiate waypoint gameobjects
             var waypointsRoot = new GameObject("Waypoints").transform;
@@ -115,7 +113,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
 
         private void SavePrefab()
         {
-            PrefabUtility.SaveAsPrefabAsset(gameObject, WorldLevelPathUtil.GetDesignedPrefabPath(_LevelType, _LevelSubtype));
+            PrefabUtility.SaveAsPrefabAsset(gameObject, WorldLevelPathUtil.GetDesignedPrefabPath(_LevelId.Type, _LevelId.Subtype));
             var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
             EditorCoroutineUtility.StartCoroutineOwnerless(ClearPrefabDirtiness(prefabStage));
         }
