@@ -1,11 +1,13 @@
 ﻿using ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main;
 using ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implementations;
 using ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Managers.Main.Implementations;
+using ICouldGames.DefenseOfThrones.World.Level.Enemy.Signals;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Main;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Main.Implementations;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Info.Managers.Main.Implementations;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Managers.LevelLoad.Implementations;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Processed;
+using ICouldGames.DefenseOfThrones.World.Level.Self.Signals;
 using ICouldGames.DefenseOfThrones.World.Level.Tower.Controllers.Main;
 using ICouldGames.DefenseOfThrones.World.Level.Tower.Controllers.Main.Implementations;
 using ICouldGames.DefenseOfThrones.World.Level.Tower.Data.Generator.Implementations;
@@ -39,6 +41,10 @@ namespace ICouldGames.DefenseOfThrones.Installers
                 .WhenInjectedInto<ProcessedEndlessWorldLevel>().Lazy();
             #endregion
 
+            #region WorldLevelScore Signals
+            Container.DeclareSignal<WorldLevelScoreUpdatedSignal>().OptionalSubscriber();
+            #endregion
+
             #region ILevelEnemyControllers
             Container.Bind<ILevelEnemyController>().To<NormalLevelEnemyController>().AsSingle()
                 .WhenInjectedInto<NormalWorldLevelController>().Lazy();
@@ -46,9 +52,15 @@ namespace ICouldGames.DefenseOfThrones.Installers
                 .WhenInjectedInto<EndlessWorldLevelController>().Lazy();
             #endregion
 
+            #region LevelEnemy Signals
+            Container.DeclareSignal<LevelEnemyDiedSignal>().OptionalSubscriber();
+            #endregion
+
             #region ILevelTowerControllers
             Container.Bind<ILevelTowerController>().To<LevelTowerController>().AsSingle().Lazy();
             #endregion
+
+
         }
     }
 }

@@ -7,5 +7,6 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Tower.Data
         public LevelTowerType LevelTowerType;
         public float Damage;
         public float AttackRate;
+        public float AttackRange;
     }
 }

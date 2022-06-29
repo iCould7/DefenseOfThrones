@@ -20,6 +20,8 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.WorldObjects
         private int _currentDestinationIndex;
         private float _hp;
 
+        public Transform MyTransform => _MyTransform;
+
         public const string RESOURCES_PATH = "WorldObjects/LevelEnemy";
 
         public void Init(float moveSpeed, float hp, List<Transform> waypoints)
@@ -39,11 +41,16 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.WorldObjects
         public void TakeDamage(float damage)
         {
             _hp -= damage;
-            if (_hp <= 0f)
+            if (IsDead())
             {
                 _signalBus.Fire(new LevelEnemyDiedSignal(this));
                 Destroy(gameObject);
             }
+        }
+
+        public bool IsDead()
+        {
+            return _hp <= 0f;
         }
 
         private IEnumerator StartMoveCoroutine()

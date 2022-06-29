@@ -11,10 +11,12 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Tower.Info
         [SerializeField] private float _MinDamage;
         [SerializeField] private float _MaxDamage;
         [SerializeField] private float _AttackRate;
+        [SerializeField] private float _AttackRange;
 
         public LevelTowerType LevelTowerType => _LevelTowerType;
         public float MinDamage => _MinDamage;
         public float MaxDamage => _MaxDamage;
         public float AttackRate => _AttackRate;
+        public float AttackRange => _AttackRange;
     }
 }

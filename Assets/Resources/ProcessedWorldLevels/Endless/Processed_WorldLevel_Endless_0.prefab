@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _MyTransform: {fileID: 3442624305384853413}
-  _LevelData:
+  _LevelProcessedData:
     _Id:
       _Type: 2
       _Subtype: 0

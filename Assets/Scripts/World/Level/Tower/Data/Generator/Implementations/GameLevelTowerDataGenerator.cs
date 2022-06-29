@@ -15,6 +15,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Tower.Data.Generator.Implemen
             var towerData = new LevelTowerData();
             towerData.LevelTowerType = towerInfo.LevelTowerType;
             towerData.AttackRate = towerInfo.AttackRate;
+            towerData.AttackRange = towerInfo.AttackRange;
             towerData.Damage = Random.Range(towerInfo.MinDamage, towerInfo.MaxDamage);
 
             return towerData;

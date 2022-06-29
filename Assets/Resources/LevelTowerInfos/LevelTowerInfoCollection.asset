@@ -16,4 +16,5 @@ MonoBehaviour:
   - _LevelTowerType: 1
     _MinDamage: 10
     _MaxDamage: 50
-    _AttackRate: 4
+    _AttackRate: 1.5
+    _AttackRange: 1.2
