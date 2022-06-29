@@ -47,3 +47,6 @@ TagManager:
   - name: Path
     uniqueID: 758651197
     locked: 0
+  - name: LevelEnemy
+    uniqueID: 1838930529
+    locked: 0

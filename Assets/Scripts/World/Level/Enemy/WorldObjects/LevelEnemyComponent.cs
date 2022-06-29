@@ -13,6 +13,8 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.WorldObjects
         private Transform _currentDestination;
         private int _currentDestinationIndex;
 
+        public const string RESOURCES_PATH = "WorldObjects/LevelEnemy";
+
         public void Init(float moveSpeed, List<Transform> waypoints)
         {
             _moveSpeed = moveSpeed;
@@ -34,6 +36,8 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.WorldObjects
                 yield return StartCoroutine(MoveToCurrentDestination());
                 _currentDestinationIndex++;
             }
+
+            //TODO: Fire enemy reached end of path signal
         }
 
         private IEnumerator MoveToCurrentDestination()

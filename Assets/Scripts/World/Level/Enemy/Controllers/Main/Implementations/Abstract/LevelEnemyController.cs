@@ -11,6 +11,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
     {
         [Inject] protected ILevelEnemiesInfoProvider LevelEnemiesInfoProvider;
         [Inject] protected EverlastingMonoBehaviour EverlastingMono;
+        [Inject] protected DiContainer DiContainer;
 
         protected WorldLevelData LevelData;
 
