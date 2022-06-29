@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
 using ICouldGames.DefenseOfThrones.World.Level.Enemy.WorldObjects;
 using ICouldGames.DefenseOfThrones.World.Level.Tower.Data;
+using ICouldGames.DefenseOfThrones.World.Level.Tower.Particles.Provider;
 using UnityEngine;
+using Zenject;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Tower.WorldObjects
 {
     public class LevelTowerComponent : MonoBehaviour
     {
+        [Inject] private LevelTowerParticlesProvider _particlesProvider;
+
         [SerializeField] private Transform _MyTransform;
 
         private LevelTowerData _towerData;
@@ -34,6 +38,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Tower.WorldObjects
             if (_readyToAttack && _targetedEnemy != null)
             {
                 _targetedEnemy.TakeDamage(_towerData.Damage);
+                PlayDamageFx(_targetedEnemy.MyTransform);
                 _readyToAttack = false;
                 _elapsedTimeAfterLastAttack = 0;
             }
@@ -46,6 +51,13 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Tower.WorldObjects
             {
                 _readyToAttack = true;
             }
+        }
+
+        private void PlayDamageFx(Transform enemyTransform)
+        {
+            var fxPrefab = _particlesProvider.GetEnemyDamageFxPrefab();
+            //TODO: Object pooling
+            Instantiate(fxPrefab, enemyTransform.position, Quaternion.identity, enemyTransform);
         }
 
         private LevelEnemyComponent GetClosestEnemyInRange()

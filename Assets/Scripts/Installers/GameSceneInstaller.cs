@@ -12,6 +12,7 @@ using ICouldGames.DefenseOfThrones.World.Level.Tower.Controllers.Main;
 using ICouldGames.DefenseOfThrones.World.Level.Tower.Controllers.Main.Implementations;
 using ICouldGames.DefenseOfThrones.World.Level.Tower.Data.Generator.Implementations;
 using ICouldGames.DefenseOfThrones.World.Level.Tower.Info.Providers.Main.Implementations;
+using ICouldGames.DefenseOfThrones.World.Level.Tower.Particles.Provider;
 using Zenject;
 
 namespace ICouldGames.DefenseOfThrones.Installers
@@ -26,6 +27,10 @@ namespace ICouldGames.DefenseOfThrones.Installers
             Container.BindInterfacesAndSelfTo<GameWorldLevelInfoProvider>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameLevelEnemiesInfoProvider>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameLevelTowerInfoProvider>().AsSingle().NonLazy();
+            #endregion
+
+            #region PrefabProviders
+            Container.BindInterfacesAndSelfTo<LevelTowerParticlesProvider>().AsSingle().NonLazy();
             #endregion
 
             #region ILevelTowerDataGenerators
