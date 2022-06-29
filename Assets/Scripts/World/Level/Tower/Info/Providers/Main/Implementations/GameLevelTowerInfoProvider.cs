@@ -1,7 +1,7 @@
 ﻿using ICouldGames.DefenseOfThrones.World.Level.Tower.Enums;
 using ICouldGames.DefenseOfThrones.World.Level.Tower.Info.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
+using Zenject;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Tower.Info.Providers.Main.Implementations
 {

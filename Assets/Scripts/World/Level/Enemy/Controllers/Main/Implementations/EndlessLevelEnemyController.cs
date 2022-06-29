@@ -10,7 +10,6 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
     public class EndlessLevelEnemyController : LevelEnemyController
     {
         private EndlessLevelEnemiesInfo _enemiesInfo;
-        private int _spawnedEnemyCount = 0;
         private float _nextSpawnWaitTime = 0f;
         private WaitForSeconds _spawnIncreasePeriodWait;
         private bool _canSpawnNextEnemy = false;
@@ -39,11 +38,8 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
             levelEnemy.Init(_enemiesInfo.MoveSpeed, LevelData._OrderedWaypoints);
             levelEnemy.StartMove();
 
-            _spawnedEnemyCount++;
             _canSpawnNextEnemy = false;
             EverlastingMono.StartCoroutine(WaitNextSpawnCoroutine());
-
-            Debug.Log("Endless enemy spawned! --> " + _spawnedEnemyCount);
         }
 
         private IEnumerator WaitNextSpawnCoroutine()
@@ -73,7 +69,6 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
 
         public override void Reset()
         {
-            _spawnedEnemyCount = 0;
             _nextSpawnWaitTime = 0f;
             _canSpawnNextEnemy = false;
             _enemiesInfo = default;
