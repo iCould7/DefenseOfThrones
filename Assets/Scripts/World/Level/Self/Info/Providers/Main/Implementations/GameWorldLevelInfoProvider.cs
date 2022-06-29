@@ -3,7 +3,7 @@ using ICouldGames.DefenseOfThrones.World.Level.Self.Info.Collections.Combined;
 using UnityEngine;
 using Zenject;
 
-namespace ICouldGames.DefenseOfThrones.World.Level.Self.Info.Managers.Main.Implementations
+namespace ICouldGames.DefenseOfThrones.World.Level.Self.Info.Providers.Main.Implementations
 {
     public class GameWorldLevelInfoProvider : IInitializable, IWorldLevelInfoProvider
     {

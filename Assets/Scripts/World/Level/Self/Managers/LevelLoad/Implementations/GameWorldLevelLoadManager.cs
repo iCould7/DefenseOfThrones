@@ -1,6 +1,6 @@
 ﻿using ICouldGames.DefenseOfThrones.World.Level.Self.DirectoryPath;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Info;
-using ICouldGames.DefenseOfThrones.World.Level.Self.Info.Managers.Main;
+using ICouldGames.DefenseOfThrones.World.Level.Self.Info.Providers.Main;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Processed;
 using UnityEngine;
 using Zenject;

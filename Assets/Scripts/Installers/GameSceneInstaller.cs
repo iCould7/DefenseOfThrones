@@ -1,10 +1,10 @@
 ﻿using ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main;
 using ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implementations;
-using ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Managers.Main.Implementations;
+using ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Providers.Main.Implementations;
 using ICouldGames.DefenseOfThrones.World.Level.Enemy.Signals;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Main;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Main.Implementations;
-using ICouldGames.DefenseOfThrones.World.Level.Self.Info.Managers.Main.Implementations;
+using ICouldGames.DefenseOfThrones.World.Level.Self.Info.Providers.Main.Implementations;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Managers.LevelLoad.Implementations;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Processed;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Signals;

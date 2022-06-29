@@ -3,7 +3,7 @@ using ICouldGames.DefenseOfThrones.World.Level.Self.Id;
 using UnityEngine;
 using Zenject;
 
-namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Managers.Main.Implementations
+namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Providers.Main.Implementations
 {
     public class GameLevelEnemiesInfoProvider : IInitializable, ILevelEnemiesInfoProvider
     {

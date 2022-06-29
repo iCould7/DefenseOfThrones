@@ -1,6 +1,6 @@
 ﻿using ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implementations.Abstract;
 using ICouldGames.DefenseOfThrones.World.Level.Enemy.Info;
-using ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Managers.Main;
+using ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Providers.Main;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Data;
 using Zenject;
 

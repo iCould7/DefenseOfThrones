@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TowerInfos:
   - _LevelTowerType: 1
-    _MinDamage: 100
-    _MaxDamage: 100
+    _MinDamage: 10
+    _MaxDamage: 10
     _AttackRate: 1.5
-    _AttackRange: 1
+    _AttackRange: 1.2

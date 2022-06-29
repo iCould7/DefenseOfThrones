@@ -1,6 +1,6 @@
 ﻿using ICouldGames.DefenseOfThrones.World.Level.Self.Id;
 
-namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Managers.Main
+namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Providers.Main
 {
     public interface ILevelEnemiesInfoProvider
     {

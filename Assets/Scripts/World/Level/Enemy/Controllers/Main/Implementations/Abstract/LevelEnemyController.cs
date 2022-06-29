@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using ICouldGames.DefenseOfThrones.Utils.MonoBehaviourUtils.Singletons;
-using ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Managers.Main;
+using ICouldGames.DefenseOfThrones.World.Level.Enemy.Info.Providers.Main;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Data;
 using UnityEngine;
 using Zenject;
