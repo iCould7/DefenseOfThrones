@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ICouldGames.DefenseOfThrones.World.Level.Enemy.Signals;
 using UnityEngine;
+using Zenject;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.WorldObjects
 {
@@ -8,18 +10,22 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.WorldObjects
     //       Maybe use physics, fixedDeltaTime, or own handling method inside update cycles
     public class LevelEnemyComponent : MonoBehaviour
     {
+        [Inject] private SignalBus _signalBus;
+
         [SerializeField] private Transform _MyTransform;
 
         private float _moveSpeed;
         private List<Transform> _waypoints;
         private Transform _currentDestination;
         private int _currentDestinationIndex;
+        private float _hp;
 
         public const string RESOURCES_PATH = "WorldObjects/LevelEnemy";
 
-        public void Init(float moveSpeed, List<Transform> waypoints)
+        public void Init(float moveSpeed, float hp, List<Transform> waypoints)
         {
             _moveSpeed = moveSpeed;
+            _hp = hp;
             _waypoints = waypoints;
         }
 
@@ -28,6 +34,16 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.WorldObjects
             _MyTransform.position = _waypoints[0].position;
             _currentDestinationIndex = 0;
             StartCoroutine(StartMoveCoroutine());
+        }
+
+        public void TakeDamage(float damage)
+        {
+            _hp -= damage;
+            if (_hp <= 0f)
+            {
+                _signalBus.Fire(new LevelEnemyDiedSignal(this));
+                Destroy(gameObject);
+            }
         }
 
         private IEnumerator StartMoveCoroutine()

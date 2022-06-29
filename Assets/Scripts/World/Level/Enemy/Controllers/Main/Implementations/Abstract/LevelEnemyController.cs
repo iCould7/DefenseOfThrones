@@ -15,11 +15,11 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
         [Inject] protected EverlastingMonoBehaviour EverlastingMono;
         [Inject] protected DiContainer DiContainer;
 
-        protected WorldLevelData LevelData;
+        protected WorldLevelData WorldLevelData;
 
-        public virtual void Init(WorldLevelData levelData)
+        public virtual void Init(WorldLevelData worldLevelData)
         {
-            LevelData = levelData;
+            WorldLevelData = worldLevelData;
         }
 
         public abstract void StartSpawningEnemies();

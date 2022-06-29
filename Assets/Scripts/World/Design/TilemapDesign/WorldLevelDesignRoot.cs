@@ -69,7 +69,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
             var processedPathGridLayer = processedLevelGO.GetComponentInChildren<PathGridLayer>();
             var processedTowerGridLayer = processedLevelGO.GetComponentInChildren<TowerGridLayer>();
 
-            var worldLevelData = new WorldLevelData();
+            var worldLevelData = new WorldLevelProcessedData();
             worldLevelData._Id.Copy(_LevelId);
 
             // Instantiate waypoint gameobjects
@@ -126,7 +126,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
                     throw new Exception("Not supported WorldLevelType!");
                 }
 
-                processedLevel._LevelData = worldLevelData;
+                processedLevel._LevelProcessedData = worldLevelData;
                 processedLevel._MyTransform = processedLevelTransform;
             }
             #endregion

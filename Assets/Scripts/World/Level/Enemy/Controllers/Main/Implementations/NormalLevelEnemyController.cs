@@ -12,10 +12,10 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
 
         private NormalLevelEnemiesInfo _enemiesInfo;
 
-        public override void Init(WorldLevelData levelData)
+        public override void Init(WorldLevelData worldLevelData)
         {
-            base.Init(levelData);
-            _enemiesInfo = _levelEnemiesInfoProvider.GetLevelEnemiesInfo<NormalLevelEnemiesInfo>(LevelData._Id);
+            base.Init(worldLevelData);
+            _enemiesInfo = _levelEnemiesInfoProvider.GetLevelEnemiesInfo<NormalLevelEnemiesInfo>(WorldLevelData.ProcessedData._Id);
         }
 
         public override void StartSpawningEnemies()

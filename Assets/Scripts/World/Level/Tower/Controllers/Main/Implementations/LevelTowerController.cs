@@ -19,10 +19,10 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Tower.Controllers.Main.Implem
         private int _spawnedTowersCount = 0;
         private LevelTowerComponent _levelTowerPrefab;
 
-        public void Init(WorldLevelData levelData)
+        public void Init(WorldLevelData worldLevelData)
         {
-            _worldLevelData = levelData;
-            _towerSlots = _worldLevelData._TowerSlots;
+            _worldLevelData = worldLevelData;
+            _towerSlots = _worldLevelData.ProcessedData._TowerSlots;
             _towerSlots.Shuffle();
             _levelTowerPrefab = Resources.Load<LevelTowerComponent>(LevelTowerComponent.RESOURCES_PATH);
         }

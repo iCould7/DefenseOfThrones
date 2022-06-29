@@ -6,7 +6,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Tower.Controllers.Main
 {
     public interface ILevelTowerController : IResettable
     {
-        void Init(WorldLevelData levelData);
+        void Init(WorldLevelData worldLevelData);
         void SpawnTower(LevelTowerType towerType);
     }
 }
