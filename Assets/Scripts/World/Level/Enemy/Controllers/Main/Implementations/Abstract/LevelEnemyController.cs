@@ -19,12 +19,9 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
             LevelData = levelData;
         }
 
-        public void StartSpawningEnemies()
-        {
-            EverlastingMono.StartCoroutine(StartSpawningEnemiesCoroutine());
-        }
+        public abstract void StartSpawningEnemies();
 
-        private IEnumerator StartSpawningEnemiesCoroutine()
+        protected IEnumerator StartSpawningEnemiesCoroutine()
         {
             while (!IsEnemySpawnsDepleted())
             {
@@ -42,5 +39,6 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
         public abstract void SpawnEnemy();
         public abstract bool IsEnemySpawnsDepleted();
         public abstract bool CanSpawnNextEnemy();
+        public abstract void Reset();
     }
 }

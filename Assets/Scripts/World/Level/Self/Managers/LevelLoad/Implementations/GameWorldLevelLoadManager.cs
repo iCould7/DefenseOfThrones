@@ -19,7 +19,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Managers.LevelLoad.Imple
 
         public void Initialize()
         {
-            var defaultEndlessLevelInfo = _worldLevelInfoProvider.GetDefaultWorldLevelInfo<NormalWorldLevelInfo>();
+            var defaultEndlessLevelInfo = _worldLevelInfoProvider.GetDefaultWorldLevelInfo<EndlessWorldLevelInfo>();
             LoadLevel(defaultEndlessLevelInfo);
         }
 
@@ -32,7 +32,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Managers.LevelLoad.Imple
             _activeLevel._MyTransform.name = _activeLevel._MyTransform.name.Replace("(Clone)", "");
             _activeLevel.Init();
 
-            _everlastingMono.StartCoroutine(UnloadCoroutine());
+            //_everlastingMono.StartCoroutine(UnloadCoroutine());
         }
 
         public void UnloadActiveLevel()

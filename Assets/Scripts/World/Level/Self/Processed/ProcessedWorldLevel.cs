@@ -20,7 +20,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Processed
 
         private void OnDestroy()
         {
-            _worldLevelController.Deactivate();
+            _worldLevelController.Reset();
         }
     }
 }

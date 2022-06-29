@@ -18,6 +18,11 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
             _enemiesInfo = _levelEnemiesInfoProvider.GetLevelEnemiesInfo<NormalLevelEnemiesInfo>(LevelData._Id);
         }
 
+        public override void StartSpawningEnemies()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override void SpawnEnemy()
         {
             throw new System.NotImplementedException();
@@ -31,6 +36,11 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
         public override bool CanSpawnNextEnemy()
         {
             return true;
+        }
+
+        public override void Reset()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

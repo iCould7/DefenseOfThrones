@@ -13,7 +13,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Main.Impleme
         public void Init(WorldLevelData levelData)
         {
             _levelData = levelData;
-            _levelEnemyController.Init(levelData);
+            _levelEnemyController.Init(_levelData);
             StartLevel();
         }
 
@@ -22,9 +22,9 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Main.Impleme
             _levelEnemyController.StartSpawningEnemies();
         }
 
-        public void Deactivate()
+        public void Reset()
         {
-
+            _levelEnemyController.Reset();
         }
     }
 }
