@@ -50,3 +50,6 @@ TagManager:
   - name: LevelEnemy
     uniqueID: 1838930529
     locked: 0
+  - name: LevelTower
+    uniqueID: 3192547543
+    locked: 0

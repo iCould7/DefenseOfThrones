@@ -1,6 +1,9 @@
-﻿using ICouldGames.DefenseOfThrones.World.Level.Self.Data;
+﻿using System.Collections.Generic;
+using ICouldGames.DefenseOfThrones.Extensions.System.Collections.Generic;
+using ICouldGames.DefenseOfThrones.World.Level.Self.Data;
 using ICouldGames.DefenseOfThrones.World.Level.Tower.Data.Generator;
 using ICouldGames.DefenseOfThrones.World.Level.Tower.Enums;
+using ICouldGames.DefenseOfThrones.World.Level.Tower.WorldObjects;
 using UnityEngine;
 using Zenject;
 
@@ -9,24 +12,37 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Tower.Controllers.Main.Implem
     public class LevelTowerController : ILevelTowerController
     {
         [Inject] private ILevelTowerDataGenerator _levelTowerDataGenerator;
+        [Inject] private DiContainer _diContainer;
 
         private WorldLevelData _worldLevelData;
+        private List<Transform> _towerSlots;
+        private int _spawnedTowersCount = 0;
+        private LevelTowerComponent _levelTowerPrefab;
 
         public void Init(WorldLevelData levelData)
         {
             _worldLevelData = levelData;
+            _towerSlots = _worldLevelData._TowerSlots;
+            _towerSlots.Shuffle();
+            _levelTowerPrefab = Resources.Load<LevelTowerComponent>(LevelTowerComponent.RESOURCES_PATH);
         }
 
         public void SpawnTower(LevelTowerType levelTowerType)
         {
-            var towerData = _levelTowerDataGenerator.GetTowerData(levelTowerType);
+            if (_spawnedTowersCount == _towerSlots.Count)
+            {
+                return;
+            }
 
-            Debug.Log("SpawnedTower!");
+            var towerData = _levelTowerDataGenerator.GetTowerData(levelTowerType);
+            var levelTower = _diContainer.InstantiatePrefabForComponent<LevelTowerComponent>(_levelTowerPrefab);
+            levelTower.Init(towerData, _towerSlots[_spawnedTowersCount].position);
+            _spawnedTowersCount++;
         }
 
         public void Reset()
         {
-
+            _spawnedTowersCount = 0;
         }
     }
 }

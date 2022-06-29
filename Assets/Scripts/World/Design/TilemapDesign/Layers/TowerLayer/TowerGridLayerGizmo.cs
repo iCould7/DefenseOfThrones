@@ -13,7 +13,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.TowerLa
 
         private void OnDrawGizmos()
         {
-            foreach (var towerPos in _TowerGridLayer.TowerSlotPositions)
+            foreach (var towerPos in _TowerGridLayer.TowerSlotPivotPositions)
             {
                 Handles.DrawSolidRectangleWithOutline(GetWorldRect(towerPos), _TowerSlotFaceColor, _TowerSlotLineColor);
             }

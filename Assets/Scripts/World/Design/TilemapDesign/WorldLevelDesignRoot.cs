@@ -4,7 +4,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using ICouldGames.DefenseOfThrones.Path.NeighbourUtils;
 using ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.PathLayer;
 using ICouldGames.DefenseOfThrones.World.Design.TilemapDesign.Layers.TowerLayer;
@@ -89,7 +88,7 @@ namespace ICouldGames.DefenseOfThrones.World.Design.TilemapDesign
             var towerSlotsRoot = new GameObject("TowerSlots").transform;
             towerSlotsRoot.SetParent(processedTowerGridLayer.MyTransform);
             towerSlotsRoot.localPosition = Vector3.zero;
-            var towerSlotPositions = _TowerGridLayer.TowerSlotPositions.ToList();
+            var towerSlotPositions = _TowerGridLayer.TowerSlotPositions;
             for (var i = 0; i < towerSlotPositions.Count; i++)
             {
                 var slotTransform = new GameObject("TowerSlot_" + i).transform;
