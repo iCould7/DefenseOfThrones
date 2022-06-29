@@ -54,6 +54,7 @@ namespace ICouldGames.DefenseOfThrones.Installers
 
             #region LevelEnemy Signals
             Container.DeclareSignal<LevelEnemyDiedSignal>().OptionalSubscriber();
+            Container.DeclareSignal<LevelEnemyReachedEndOfPathSignal>().OptionalSubscriber();
             #endregion
 
             #region ILevelTowerControllers

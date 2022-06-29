@@ -7,5 +7,6 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Main
     {
         void Init(WorldLevelProcessedData levelProcessedData);
         void StartLevel();
+        void RestartLevel();
     }
 }

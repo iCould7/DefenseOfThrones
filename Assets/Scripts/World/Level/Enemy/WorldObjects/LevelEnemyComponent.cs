@@ -62,7 +62,8 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.WorldObjects
                 _currentDestinationIndex++;
             }
 
-            //TODO: Fire enemy reached end of path signal
+            _signalBus.Fire(new LevelEnemyReachedEndOfPathSignal(this));
+            Destroy(gameObject);
         }
 
         private IEnumerator MoveToCurrentDestination()

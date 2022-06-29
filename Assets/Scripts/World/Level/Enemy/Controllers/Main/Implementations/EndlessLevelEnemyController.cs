@@ -14,6 +14,9 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
         private WaitForSeconds _spawnIncreasePeriodWait;
         private bool _canSpawnNextEnemy = false;
         private LevelEnemyComponent _levelEnemyPrefab;
+        private Coroutine _spawnEnemiesCoroutine;
+        private Coroutine _spawnRateCoroutine;
+        private Coroutine _waitNextSpawnCoroutine;
 
         public override void Init(WorldLevelData worldLevelData)
         {
@@ -27,8 +30,8 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
         public override void StartSpawningEnemies()
         {
             _canSpawnNextEnemy = true;
-            EverlastingMono.StartCoroutine(StartSpawningEnemiesCoroutine());
-            EverlastingMono.StartCoroutine(StartSpawnRateIncreaseCoroutine());
+            _spawnEnemiesCoroutine = EverlastingMono.StartCoroutine(StartSpawningEnemiesCoroutine());
+            _spawnRateCoroutine = EverlastingMono.StartCoroutine(StartSpawnRateIncreaseCoroutine());
         }
 
         public override void SpawnEnemy()
@@ -40,7 +43,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
             levelEnemy.StartMove();
 
             _canSpawnNextEnemy = false;
-            EverlastingMono.StartCoroutine(WaitNextSpawnCoroutine());
+            _waitNextSpawnCoroutine = EverlastingMono.StartCoroutine(WaitNextSpawnCoroutine());
         }
 
         private IEnumerator WaitNextSpawnCoroutine()
@@ -70,6 +73,9 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
 
         public override void Reset()
         {
+            EverlastingMono.StopCoroutine(_spawnEnemiesCoroutine);
+            EverlastingMono.StopCoroutine(_spawnRateCoroutine);
+            EverlastingMono.StopCoroutine(_waitNextSpawnCoroutine);
             _nextSpawnWaitTime = 0f;
             _canSpawnNextEnemy = false;
             _enemiesInfo = default;

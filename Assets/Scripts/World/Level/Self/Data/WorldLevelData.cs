@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ICouldGames.DefenseOfThrones.World.Level.Enemy.WorldObjects;
+using ICouldGames.DefenseOfThrones.World.Level.Tower.WorldObjects;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Self.Data
 {
@@ -7,6 +8,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Data
     {
         public WorldLevelProcessedData ProcessedData;
         public List<LevelEnemyComponent> AliveEnemies = new();
+        public List<LevelTowerComponent> SpawnedTowers = new();
         public float ScorePoints;
     }
 }

@@ -37,6 +37,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Tower.Controllers.Main.Implem
             var towerData = _levelTowerDataGenerator.GetTowerData(levelTowerType);
             var levelTower = _diContainer.InstantiatePrefabForComponent<LevelTowerComponent>(_levelTowerPrefab);
             levelTower.Init(_towerSlots[_spawnedTowersCount].position, towerData, _worldLevelData.AliveEnemies);
+            _worldLevelData.SpawnedTowers.Add(levelTower);
             _spawnedTowersCount++;
         }
 

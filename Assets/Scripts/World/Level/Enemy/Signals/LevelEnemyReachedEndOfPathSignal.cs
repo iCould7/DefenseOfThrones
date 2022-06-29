@@ -2,11 +2,11 @@
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Signals
 {
-    public class LevelEnemyDiedSignal
+    public class LevelEnemyReachedEndOfPathSignal
     {
         public LevelEnemyComponent Enemy { get; }
 
-        public LevelEnemyDiedSignal(LevelEnemyComponent enemy)
+        public LevelEnemyReachedEndOfPathSignal(LevelEnemyComponent enemy)
         {
             Enemy = enemy;
         }

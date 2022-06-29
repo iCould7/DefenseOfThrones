@@ -22,8 +22,6 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
             WorldLevelData = worldLevelData;
         }
 
-        public abstract void StartSpawningEnemies();
-
         protected IEnumerator StartSpawningEnemiesCoroutine()
         {
             while (!IsEnemySpawnsDepleted())
@@ -39,9 +37,10 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implem
             }
         }
 
+        public abstract void Reset();
+        public abstract void StartSpawningEnemies();
         public abstract void SpawnEnemy();
         public abstract bool IsEnemySpawnsDepleted();
         public abstract bool CanSpawnNextEnemy();
-        public abstract void Reset();
     }
 }
