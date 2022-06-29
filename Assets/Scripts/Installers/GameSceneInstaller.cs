@@ -6,6 +6,10 @@ using ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Main.Implementat
 using ICouldGames.DefenseOfThrones.World.Level.Self.Info.Managers.Main.Implementations;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Managers.LevelLoad.Implementations;
 using ICouldGames.DefenseOfThrones.World.Level.Self.Processed;
+using ICouldGames.DefenseOfThrones.World.Level.Tower.Controllers.Main;
+using ICouldGames.DefenseOfThrones.World.Level.Tower.Controllers.Main.Implementations;
+using ICouldGames.DefenseOfThrones.World.Level.Tower.Data.Generator.Implementations;
+using ICouldGames.DefenseOfThrones.World.Level.Tower.Info.Providers.Main.Implementations;
 using Zenject;
 
 namespace ICouldGames.DefenseOfThrones.Installers
@@ -19,6 +23,11 @@ namespace ICouldGames.DefenseOfThrones.Installers
             #region InfoManagers
             Container.BindInterfacesAndSelfTo<GameWorldLevelInfoProvider>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameLevelEnemiesInfoProvider>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<GameLevelTowerInfoProvider>().AsSingle().NonLazy();
+            #endregion
+
+            #region ILevelTowerDataGenerators
+            Container.BindInterfacesAndSelfTo<GameLevelTowerDataGenerator>().AsSingle().NonLazy();
             #endregion
 
             Container.BindInterfacesAndSelfTo<GameWorldLevelLoadManager>().AsSingle().NonLazy();
@@ -35,6 +44,10 @@ namespace ICouldGames.DefenseOfThrones.Installers
                 .WhenInjectedInto<NormalWorldLevelController>().Lazy();
             Container.Bind<ILevelEnemyController>().To<EndlessLevelEnemyController>().AsSingle()
                 .WhenInjectedInto<EndlessWorldLevelController>().Lazy();
+            #endregion
+
+            #region ILevelTowerControllers
+            Container.Bind<ILevelTowerController>().To<LevelTowerController>().AsSingle().Lazy();
             #endregion
         }
     }
