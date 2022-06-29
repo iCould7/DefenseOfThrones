@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.WorldObjects
 {
+    // TODO: My logic here for moving enemies is wrong. This code is frame dependent.
+    //       Maybe use physics, fixedDeltaTime, or own handling method inside update cycles
     public class LevelEnemyComponent : MonoBehaviour
     {
         [SerializeField] private Transform _MyTransform;

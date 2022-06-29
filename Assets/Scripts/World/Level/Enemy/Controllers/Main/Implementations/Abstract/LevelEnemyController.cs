@@ -7,6 +7,8 @@ using Zenject;
 
 namespace ICouldGames.DefenseOfThrones.World.Level.Enemy.Controllers.Main.Implementations.Abstract
 {
+    // TODO: My logic here for spawning enemies is wrong. This code is frame dependent.
+    //       Maybe use physics, fixedDeltaTime, or own handling method inside update cycles
     public abstract class LevelEnemyController : ILevelEnemyController
     {
         [Inject] protected ILevelEnemiesInfoProvider LevelEnemiesInfoProvider;
