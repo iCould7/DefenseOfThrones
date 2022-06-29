@@ -43,6 +43,7 @@ namespace ICouldGames.DefenseOfThrones.Installers
 
             #region WorldLevelScore Signals
             Container.DeclareSignal<WorldLevelScoreUpdatedSignal>().OptionalSubscriber();
+            Container.DeclareSignal<WorldLevelStartedSignal>().OptionalSubscriber();
             #endregion
 
             #region ILevelEnemyControllers

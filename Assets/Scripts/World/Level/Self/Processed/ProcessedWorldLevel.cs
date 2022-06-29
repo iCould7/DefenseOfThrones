@@ -8,19 +8,19 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Processed
 {
     public class ProcessedWorldLevel : MonoBehaviour
     {
-        [Inject] private IWorldLevelController _worldLevelController;
+        [Inject] public IWorldLevelController WorldLevelController;
 
         [ReadOnly] public Transform _MyTransform;
         [ReadOnly] public WorldLevelProcessedData _LevelProcessedData;
 
         public void Init()
         {
-            _worldLevelController.Init(_LevelProcessedData);
+            WorldLevelController.Init(_LevelProcessedData);
         }
 
         private void OnDestroy()
         {
-            _worldLevelController.Reset();
+            WorldLevelController.Reset();
         }
     }
 }

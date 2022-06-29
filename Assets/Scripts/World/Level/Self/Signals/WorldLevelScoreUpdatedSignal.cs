@@ -2,9 +2,9 @@
 {
     public class WorldLevelScoreUpdatedSignal
     {
-        public float NewScorePoints { get; private set; }
+        public int NewScorePoints { get; }
 
-        public WorldLevelScoreUpdatedSignal(float newScorePoints)
+        public WorldLevelScoreUpdatedSignal(int newScorePoints)
         {
             NewScorePoints = newScorePoints;
         }

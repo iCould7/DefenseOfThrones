@@ -15,6 +15,7 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Main.Impleme
         [Inject] private ILevelTowerController _levelTowerController;
 
         private WorldLevelData _levelData = new();
+        private bool _isLevelActive = false;
 
         public void Init(WorldLevelProcessedData levelProcessedData)
         {
@@ -30,7 +31,9 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Main.Impleme
 
         public void StartLevel()
         {
+            _isLevelActive = true;
             _levelEnemyController.StartSpawningEnemies();
+            _signalBus.Fire(new WorldLevelStartedSignal(_levelData));
         }
 
         public void RestartLevel()
@@ -50,8 +53,19 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Controllers.Main.Impleme
             Init(_levelData.ProcessedData);
         }
 
+        public WorldLevelData GetCurrentLevelData()
+        {
+            return _levelData;
+        }
+
+        public bool IsLevelActive()
+        {
+            return _isLevelActive;
+        }
+
         public void Reset()
         {
+            _isLevelActive = false;
             _levelData.ScorePoints = 0;
             _levelData.AliveEnemies.Clear();
             _levelData.SpawnedTowers.Clear();

@@ -9,6 +9,6 @@ namespace ICouldGames.DefenseOfThrones.World.Level.Self.Data
         public WorldLevelProcessedData ProcessedData;
         public List<LevelEnemyComponent> AliveEnemies = new();
         public List<LevelTowerComponent> SpawnedTowers = new();
-        public float ScorePoints;
+        public int ScorePoints;
     }
 }
